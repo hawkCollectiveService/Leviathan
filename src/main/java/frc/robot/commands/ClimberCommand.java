@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class ClimberCommand extends CommandBase {
-  private final ClimberSubsystem m_climberSubsystem;
+  private final ClimberSubsystem climberSubsystem;
   /**
    * Creates a new ClimberCommand.
    */
   public ClimberCommand(ClimberSubsystem subsystem) {
 
     // Use addRequirements() here to declare subsystem dependencies.
-    m_climberSubsystem = subsystem;
+    climberSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -32,9 +32,8 @@ public class ClimberCommand extends CommandBase {
   // Calls which drive mode we're going to use during competitions
   @Override
   public void execute() {
-    //System.out.println("DEVCHECK ClimberCommand.execute"); // floods the RioLog. be careful
-    //m_driveTrainSubsystem.joystickArcadeDrive();
-    m_climberSubsystem.xboxArcadeDrive();
+    //System.out.println("DEVCHECK ShooterCommand.execute"); // floods the RioLog. be careful
+    climberSubsystem.climb();
   }
 
   // Called once the command ends or is interrupted.
