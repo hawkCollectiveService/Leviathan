@@ -86,7 +86,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //System.out.println("ping");
-    m_robotContainer.getDriveTrainCommand().execute();
+   
+    m_robotContainer.getIntakerCommand().execute();
     //driveTrainSubsystem.arcadeDrive(0.1, 0.1);  // 2022-02-10  devtest
 
   }

@@ -6,11 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+//import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakerCommand;
+//import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakerSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.commands.DriveTrainCommand;
+//import frc.robot.subsystems.DriveTrainSubsystem;
+//import frc.robot.commands.DriveTrainCommand;
 // import frc.robot.subsystems.ClimberSubsystem;
 // import frc.robot.commands.ClimberCommand;
 
@@ -25,13 +27,15 @@ import frc.robot.commands.DriveTrainCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Connects DrivetrainSubsystem and DriveTrainCommand together
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  //private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
+  //private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  private final IntakerSubsystem intakerSubsystem = new IntakerSubsystem();
+  private final IntakerCommand intakerCommand = new IntakerCommand(intakerSubsystem);
 
     // Connects ClimberSubsystem and ClimberCommand together
     // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
@@ -65,15 +69,13 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     System.out.println("DEVCHECK getAutonomousCommand");
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return intakerCommand;
   }
 
-  /**
-   * Returns the DriveTrainCommand object to run drive train during teleop
-   */
-  public Command getDriveTrainCommand() {
-    // System.out.println("DRIVE TRAIN");
-    return m_driveTrainCommand;
+  
+  public Command getIntakerCommand(){
+    
+    return intakerCommand;
   }
 
     /**

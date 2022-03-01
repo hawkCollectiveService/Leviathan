@@ -21,7 +21,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 @SuppressWarnings("unused")
 public final class Constants {
     // Kinematics measurement for Swerve Drive.
-    public static final double DISTANCE_FROM_CENTER = 0.425; // meters
+    public static final double DISTANCE_FROM_CENTER = 0.175; // meters
     public static final double RADIUS_OF_WHEEL = 0.05013; // meters
 
     // Note: The drive encoder uses 1024 ticks per revolution and is accessed by getPosition()
@@ -58,8 +58,8 @@ public final class Constants {
     public static final int RIGHT_BACK_SPARK_MAX_ID = 7;
 
     // CAN IDs for Intake
-    public static final int LEFT_INTAKE_ID = 9;
-    public static final int RIGHT_INTAKE_ID = 10;
+    public static final int INTAKE_ID = 9;
+    //public static final int RIGHT_INTAKE_ID = 10;
 
     // CAN IDs for Feeder
     public static final int FEEDER_ID = 11;
@@ -98,6 +98,7 @@ public final class Constants {
     public static final int XBOX_DRIVER_CONTROLLER_PORT_ID = 3;
     public static final int DRIVER_JOYSTICK_X_PORT_ID = 1;
     public static final int DRIVER_JOYSTICK_Y_PORT_ID = 0;
+
 
     // variables
     public static boolean isTargeting = false;
