@@ -21,7 +21,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 @SuppressWarnings("unused")
 public final class Constants {
     // Kinematics measurement for Swerve Drive.
-    public static final double DISTANCE_FROM_CENTER = 0.425; // meters
+    public static final double DISTANCE_FROM_CENTER = 0.175; // meters
     public static final double RADIUS_OF_WHEEL = 0.05013; // meters
 
     // Note: The drive encoder uses 1024 ticks per revolution and is accessed by getPosition()
@@ -78,12 +78,14 @@ public final class Constants {
      * Speed modifiers for Teleop
      */
     public static final double TELEOP_DRIVE_SPEED_MODIFIER = 0.40;      // for Swerve, must set > 0.2
-    public static final double SHOOTER_TARGETING_TURNING_SPEED = 0.5;
     public static final double NO_SPEED = 0.0;
     public static final double LIFT_CONTROLLER_RELEASE_SPEED = 0.25;
     public static final double LIFT_CONTROLLER_INTAKE_SPEED = -0.25;
-    public static final double SHOOTER_MAGAZINE_OUTTAKE_SPEED = 0.3;
+    public static final double SHOOTER_LOW_SPEED = 0.25;
+    public static final double SHOOTER_HIGH_SPEED = 0.5;
     public static final double INTAKE_SPEED = 0.275;
+    public static final double FEEDER_SPEED = 0.275;
+
 
     /**
      * Motor types for the Spark Max Controller
@@ -98,6 +100,9 @@ public final class Constants {
     public static final int XBOX_DRIVER_CONTROLLER_PORT_ID = 3;
     public static final int DRIVER_JOYSTICK_X_PORT_ID = 1;
     public static final int DRIVER_JOYSTICK_Y_PORT_ID = 0;
+
+    // Xbox analog joystick limiter to prevent drift or continuous running.
+    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
 
     // variables
     public static boolean isTargeting = false;

@@ -85,9 +85,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //System.out.println("ping");
-    m_robotContainer.getDriveTrainCommand().execute();
-    //driveTrainSubsystem.arcadeDrive(0.1, 0.1);  // 2022-02-10  devtest
+    m_robotContainer.getShooterCommand().execute();
 
   }
 
