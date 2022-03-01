@@ -20,6 +20,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 // import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import frc.robot.Constants;
 
+@SuppressWarnings("unused")
 public class SwerveModule {
 
   private static final double kWheelRadius = Constants.RADIUS_OF_WHEEL;
@@ -52,8 +53,8 @@ public class SwerveModule {
           kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
 
   // Gains (StaticGain, VelocityGain) are for example purposes only - must be determined for your own robot!
-  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);    // TODO: Adjust drive feedForward gains per testing.
-  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);   // TODO: Adjust steer feedForward gains per testing.
+  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);    // DevNote: Adjust drive feedForward gains per testing.
+  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);   // DevNote: Adjust steer feedForward gains per testing.
 
   /**
    * Constructs a SwerveModule with a drive motor, turning motor, drive encoder

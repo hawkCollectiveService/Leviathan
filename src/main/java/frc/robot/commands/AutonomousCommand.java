@@ -8,20 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.AutonomousSubsystem;
 
-public class ClimberCommand extends CommandBase {
-  private final ClimberSubsystem m_climberSubsystem;
+public class AutonomousCommand extends CommandBase {
+  private AutonomousSubsystem m_autonomousSubsystem = new AutonomousSubsystem();
+  
   /**
-   * Creates a new ClimberCommand.
+   * Creates a new AutonomousCommand.
    */
-  public ClimberCommand(ClimberSubsystem subsystem) {
-
+  public AutonomousCommand(AutonomousSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_climberSubsystem = subsystem;
+    m_autonomousSubsystem = subsystem;
     addRequirements(subsystem);
   }
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -29,12 +28,9 @@ public class ClimberCommand extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  // Calls which drive mode we're going to use during competitions
   @Override
   public void execute() {
-    //System.out.println("DEVCHECK ClimberCommand.execute"); // floods the RioLog. be careful
-    //m_driveTrainSubsystem.joystickArcadeDrive();
-    m_climberSubsystem.xboxArcadeDrive();
+    m_autonomousSubsystem.autonomous();
   }
 
   // Called once the command ends or is interrupted.

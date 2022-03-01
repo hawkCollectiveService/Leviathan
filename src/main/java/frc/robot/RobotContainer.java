@@ -6,10 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+// import frc.robot.commands.ExampleCommand;
+// import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.AutonomousSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveTrainCommand;
 // import frc.robot.subsystems.ClimberSubsystem;
 // import frc.robot.commands.ClimberCommand;
@@ -25,17 +27,21 @@ import frc.robot.commands.DriveTrainCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Connects DrivetrainSubsystem and DriveTrainCommand together
   private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
   private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
 
-    // Connects ClimberSubsystem and ClimberCommand together
-    // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-    // private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+  // Creates an autonomous subsystem and command
+  private final AutonomousSubsystem m_autonomousSubsystem = new AutonomousSubsystem();
+  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(m_autonomousSubsystem);
+
+  // Connects ClimberSubsystem and ClimberCommand together
+  // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  // private final ClimberCommand m_climberCommand = new
+  // ClimberCommand(m_climberSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -58,17 +64,6 @@ public class RobotContainer {
   }
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    System.out.println("DEVCHECK getAutonomousCommand");
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
-
-  /**
    * Returns the DriveTrainCommand object to run drive train during teleop
    */
   public Command getDriveTrainCommand() {
@@ -76,11 +71,13 @@ public class RobotContainer {
     return m_driveTrainCommand;
   }
 
-    /**
-   * Returns the ClimberCommand object to run drive train during teleop
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
    */
-  // public Command getClimberCommand() {
-  //   // System.out.println("DEVCHECK: Climber");
-  //   return m_climberCommand;
-  // }
+  public Command getAutonomousCommand() {
+    // Command will run in autonomous
+    return m_autonomousCommand;
+  }
 }

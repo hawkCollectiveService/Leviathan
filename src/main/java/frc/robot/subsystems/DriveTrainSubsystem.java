@@ -26,58 +26,10 @@ import edu.wpi.first.wpilibj.Encoder;
 
 import frc.robot.Constants;
 
-/**
- * @since 2022-02-xx
- * @version 2022-02-24 -integrated SwerveModule.<br/> 
- */
 @SuppressWarnings("unused")
 public class DriveTrainSubsystem extends SubsystemBase {
   public static final double kMaxSpeed = 3.0; // 3 meters per second
   public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
-
-  /**
-   * Spark Max Controllers - SwerveDrive Drive Motors (NEO Brushless)
-   */
-  // private CANSparkMax leftFrontSparkMax = new
-  // CANSparkMax(Constants.LEFT_FRONT_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax leftBackSparkMax = new
-  // CANSparkMax(Constants.LEFT_BACK_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax rightFrontSparkMax = new
-  // CANSparkMax(Constants.RIGHT_FRONT_SPARK_MAX_ID,
-  // Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax rightBackSparkMax = new
-  // CANSparkMax(Constants.RIGHT_BACK_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-
-  // Drive Encoders - built-in to NEO connected to SparkMax controllers.
-  // RelativeEncoder leftFrontDriveEncoder = leftFrontSparkMax.getEncoder();
-  // RelativeEncoder leftBackDriveEncoder = leftBackSparkMax.getEncoder();
-  // RelativeEncoder rightFrontDriveEncoder = rightFrontSparkMax.getEncoder();
-  // RelativeEncoder rightBackDriveEncoder = rightBackSparkMax.getEncoder();
-
-  /**
-   * TalonSRX Controllers - SwerveDrive PG Steer Motors (PG71)
-   */
-  // private WPI_TalonSRX leftFrontTalonSRX = new
-  // WPI_TalonSRX(Constants.LEFT_FRONT_TALON_SRX_ID);
-  // private WPI_TalonSRX leftBackTalonSRX = new
-  // WPI_TalonSRX(Constants.LEFT_BACK_TALON_SRX_ID);
-  // private WPI_TalonSRX rightFrontTalonSRX = new
-  // WPI_TalonSRX(Constants.RIGHT_FRONT_TALON_SRX_ID);
-  // private WPI_TalonSRX rightBackTalonSRX = new
-  // WPI_TalonSRX(Constants.RIGHT_BACK_TALON_SRX_ID);
-
-  // Lamprey steer encoder (connected to TalonSRX)s- SwerveModule
-  // WPI_CANCoder leftFrontSteerEncoder = new
-  // WPI_CANCoder(Constants.LEFT_FRONT_TALON_SRX_ID);
-  // WPI_CANCoder leftBackSteerEncoder = new
-  // WPI_CANCoder(Constants.LEFT_BACK_TALON_SRX_ID);
-  // WPI_CANCoder rightFrontSteerEncoder = new
-  // WPI_CANCoder(Constants.RIGHT_FRONT_TALON_SRX_ID);
-  // WPI_CANCoder rightBackSteerEncoder = new
-  // WPI_CANCoder(Constants.RIGHT_BACK_TALON_SRX_ID);
-
-  // private XboxController assistantDriverController = new
-  // XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
 
   /**
    * Xbox controller object used in the case the driver drives with an Xbox
@@ -123,7 +75,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(1);
   private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(1);
 
-  // TODO: Refactor this class so that declarations and initializations are
+  // DevNote: Refactor this class so that declarations and initializations are
   // separated by the constructor.
   public DriveTrainSubsystem() {
     m_gyro.reset();
@@ -170,11 +122,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     var rot = -m_rotLimiter.calculate(MathUtil.applyDeadband(driverController.getRightX(), 0.02))
         * DriveTrainSubsystem.kMaxAngularSpeed;
 
-    //this.drive(xSpeed, ySpeed, rot, fieldRelative);
-  
-    if (Math.abs(xSpeed) < 0.2) xSpeed=0;
-    if (Math.abs(ySpeed) < 0.2) ySpeed=0;
-    if (Math.abs(rot) < 0.2) rot=0;
+    // Adjust for XboxController analog joystick drift. Prevents from motoring
+    // continuously running idle.
+    if (Math.abs(xSpeed) < Constants.XBOX_DRIVER_ANALOG_LIMITER) xSpeed=0;
+    if (Math.abs(ySpeed) < Constants.XBOX_DRIVER_ANALOG_LIMITER) ySpeed=0;
+    if (Math.abs(rot) < Constants.XBOX_DRIVER_ANALOG_LIMITER) rot=0;
+
     // this.drive(0.0, 0.0, 0.0, fieldRelative);  // devTest
     this.drive(xSpeed, ySpeed, rot, fieldRelative);
   }

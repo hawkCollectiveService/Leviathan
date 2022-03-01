@@ -99,6 +99,9 @@ public final class Constants {
     public static final int DRIVER_JOYSTICK_X_PORT_ID = 1;
     public static final int DRIVER_JOYSTICK_Y_PORT_ID = 0;
 
+    // Xbox analog joystick limiter to prevent drift or continuous running.
+    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
+
     // variables
     public static boolean isTargeting = false;
 }
