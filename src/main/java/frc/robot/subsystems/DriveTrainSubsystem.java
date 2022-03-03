@@ -36,50 +36,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
 
   /**
-   * Spark Max Controllers - SwerveDrive Drive Motors (NEO Brushless)
-   */
-  // private CANSparkMax leftFrontSparkMax = new
-  // CANSparkMax(Constants.LEFT_FRONT_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax leftBackSparkMax = new
-  // CANSparkMax(Constants.LEFT_BACK_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax rightFrontSparkMax = new
-  // CANSparkMax(Constants.RIGHT_FRONT_SPARK_MAX_ID,
-  // Constants.BRUSHLESS_MOTOR);
-  // private CANSparkMax rightBackSparkMax = new
-  // CANSparkMax(Constants.RIGHT_BACK_SPARK_MAX_ID, Constants.BRUSHLESS_MOTOR);
-
-  // Drive Encoders - built-in to NEO connected to SparkMax controllers.
-  // RelativeEncoder leftFrontDriveEncoder = leftFrontSparkMax.getEncoder();
-  // RelativeEncoder leftBackDriveEncoder = leftBackSparkMax.getEncoder();
-  // RelativeEncoder rightFrontDriveEncoder = rightFrontSparkMax.getEncoder();
-  // RelativeEncoder rightBackDriveEncoder = rightBackSparkMax.getEncoder();
-
-  /**
-   * TalonSRX Controllers - SwerveDrive PG Steer Motors (PG71)
-   */
-  // private WPI_TalonSRX leftFrontTalonSRX = new
-  // WPI_TalonSRX(Constants.LEFT_FRONT_TALON_SRX_ID);
-  // private WPI_TalonSRX leftBackTalonSRX = new
-  // WPI_TalonSRX(Constants.LEFT_BACK_TALON_SRX_ID);
-  // private WPI_TalonSRX rightFrontTalonSRX = new
-  // WPI_TalonSRX(Constants.RIGHT_FRONT_TALON_SRX_ID);
-  // private WPI_TalonSRX rightBackTalonSRX = new
-  // WPI_TalonSRX(Constants.RIGHT_BACK_TALON_SRX_ID);
-
-  // Lamprey steer encoder (connected to TalonSRX)s- SwerveModule
-  // WPI_CANCoder leftFrontSteerEncoder = new
-  // WPI_CANCoder(Constants.LEFT_FRONT_TALON_SRX_ID);
-  // WPI_CANCoder leftBackSteerEncoder = new
-  // WPI_CANCoder(Constants.LEFT_BACK_TALON_SRX_ID);
-  // WPI_CANCoder rightFrontSteerEncoder = new
-  // WPI_CANCoder(Constants.RIGHT_FRONT_TALON_SRX_ID);
-  // WPI_CANCoder rightBackSteerEncoder = new
-  // WPI_CANCoder(Constants.RIGHT_BACK_TALON_SRX_ID);
-
-  // private XboxController assistantDriverController = new
-  // XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
-
-  /**
    * Xbox controller object used in the case the driver drives with an Xbox
    * controller
    */
@@ -87,7 +43,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   /**
    * Swerve Drive Kinematics
-   * The SwerveDriveKinematics class is a useful tool that converts between a
+   * The SwerveDriveKinematics class converts between a
    * ChassisSpeeds object and several SwerveModuleState objects, which contains
    * velocities and angles for each swerve module of a swerve drive robot.
    */
@@ -145,10 +101,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
             ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
             : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed);
-    leftFrontSwerveModule.setDesiredState(swerveModuleStates[0]);
-    rightFrontSwerveModule.setDesiredState(swerveModuleStates[1]);
-    leftBackSwerveModule.setDesiredState(swerveModuleStates[2]);
-    rightBackSwerveModule.setDesiredState(swerveModuleStates[3]);
+
+    leftFrontSwerveModule.setDesiredState(swerveModuleStates[0], false, false, true);
+    rightFrontSwerveModule.setDesiredState(swerveModuleStates[1], true, true, true);
+    leftBackSwerveModule.setDesiredState(swerveModuleStates[2], true, true, false);
+    rightBackSwerveModule.setDesiredState(swerveModuleStates[3], false, true, false);
   }
 
   public void xboxSwerveDrive(boolean fieldRelative) {

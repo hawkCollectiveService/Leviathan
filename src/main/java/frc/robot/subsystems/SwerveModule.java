@@ -108,7 +108,7 @@ public class SwerveModule {
    *
    * @param desiredState Desired state with speed and angle.
    */
-  public void setDesiredState(SwerveModuleState desiredState) {
+  public void setDesiredState(SwerveModuleState desiredState, boolean reverseDrive, boolean reverseSteer, boolean frontPower) {
     // Optimize the reference state to avoid spinning further than 90 degrees
     SwerveModuleState state = SwerveModuleState.optimize(desiredState, new Rotation2d(m_steerEncoder.getPosition()));
 
@@ -126,7 +126,30 @@ public class SwerveModule {
 
     final double turnFeedforward = m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
 
-    m_driveMotor.setVoltage(driveOutput + driveFeedforward);
-    m_steerMotor.setVoltage(turnOutput + turnFeedforward);
+    if (reverseDrive) {
+      m_driveMotor.setVoltage( (driveOutput + driveFeedforward) * -1);
+    }
+    else {
+      m_driveMotor.setVoltage(driveOutput + driveFeedforward);
+    }
+
+    if (reverseSteer) {
+      if (frontPower) {
+        m_steerMotor.setVoltage((turnOutput + turnFeedforward) * -2);
+      }
+      else{
+        m_steerMotor.setVoltage((turnOutput + turnFeedforward) * -1);
+
+      }
+    }
+    else {
+      if (frontPower) {
+        m_steerMotor.setVoltage((turnOutput + turnFeedforward) * 2);
+      }
+      else{
+        m_steerMotor.setVoltage((turnOutput + turnFeedforward));
+
+      }
+    }
   }
 }

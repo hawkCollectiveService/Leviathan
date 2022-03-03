@@ -29,7 +29,7 @@ public final class Constants {
     public static final int DRIVE_ENCODER_RESOLUTION = 1024;  // 10-bit encoder. 2^10=1024
     public static final int STEER_ENCODER_RESOLUTION = 360;   // 42 ticks per revoluion vendor info
 
-    public static final double DRIVE_PID_PROPORTIONAL_GAIN = 1.0;  // Default P value for PIDController in SwerveModule (0=Disable)
+    public static final double DRIVE_PID_PROPORTIONAL_GAIN = 0.0;  // Default P value for PIDController in SwerveModule (0=Disable)
     public static final double DRIVE_PID_INTEGRAL_GAIN = 0.0;      // Default I value for PIDController in SwerveModule (0=Disable)
     public static final double DRIVE_PID_DERIVATIVE_GAIN = 0.0;    // Default D value for PIDController in SwerveModule (0=Disable)
 
