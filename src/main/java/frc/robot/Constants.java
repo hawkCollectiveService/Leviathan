@@ -63,11 +63,11 @@ public final class Constants {
     //public static final int RIGHT_INTAKE_ID = 10;
 
     // CAN IDs for Feeder
-    public static final int FEEDER_ID = 11;
+    public static final int FEEDER_ID = 10;
 
     // CAN IDs for Shooter
-    public static final int LEFT_SHOOTER_ID = 12;
-    public static final int RIGHT_SHOOTER_ID = 13;
+    public static final int LEFT_SHOOTER_ID = 11;
+    public static final int RIGHT_SHOOTER_ID = 12;
 
     // CAN IDs for Climber controller+motor - TalonFX+Falcon500.
     public static final int LEFT_WINCH_TALON_FX_ID = 13;
@@ -84,10 +84,10 @@ public final class Constants {
     public static final double LIFT_CONTROLLER_INTAKE_SPEED = -0.25;
     public static final double SHOOTER_LOW_SPEED = 0.25;
     public static final double SHOOTER_HIGH_SPEED = 0.5;
-    public static final double INTAKE_SPEED = 0.275;
-    public static final double FEEDER_SPEED = 0.275;
+    public static final double INTAKE_SPEED = 0.125;
+    public static final double FEEDER_SPEED = 0.55;
     public static final double LEFT_CLIMB_SPEED = 0.25;
-    public static final double RIGHT_CLIMB_SPEED = 0.5;
+    public static final double RIGHT_CLIMB_SPEED = 0.25;
 
 
     /**
@@ -127,7 +127,8 @@ public final class Constants {
     public static final int RIGHT_BACK_STEER_POLARITY_MOD = 1;
     public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
     public static final int LEFT_CLIMBER_POLARITY_MOD = 1;
-    
+    public static final int INTAKE_POLARITY_MOD = -1;
+
 
     public static final int DEGREE_TOLERANCE = 3;
 }

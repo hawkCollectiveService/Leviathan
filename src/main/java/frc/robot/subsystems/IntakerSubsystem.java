@@ -25,7 +25,7 @@ public class IntakerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     if (assistantDriver.getAButtonPressed())
     {
-      intakeTalon.set(Constants.INTAKE_SPEED);
+      intakeTalon.set(Constants.INTAKE_SPEED * Constants.INTAKE_POLARITY_MOD);
     }
     if (assistantDriver.getAButtonReleased())
     {

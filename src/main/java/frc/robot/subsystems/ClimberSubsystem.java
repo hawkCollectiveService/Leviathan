@@ -46,18 +46,14 @@ public class ClimberSubsystem extends SubsystemBase {
 
     // If the LeftBumper and RightBumper are pressed,
     // the Climb Left process will begin.
-    if (assistantDriverController.getLeftBumperPressed()
-        && assistantDriverController.getRightBumperPressed()) {
+    if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed())
       leftClimb();
-      rightClimb();
-    }
-
-    // Temporary stop for the climber
-    if (assistantDriverController.getLeftBumperReleased()
-        || assistantDriverController.getRightBumperReleased()) {
+    else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed())
+      rightRelease();
+    else if (assistantDriverController.getLeftBumperReleased())
       stopClimber();
-    }
-
+    else if (assistantDriverController.getRightBumperReleased())
+      stopClimber();
   }
 
   private void releaseCompression(){
@@ -69,7 +65,7 @@ public class ClimberSubsystem extends SubsystemBase {
     rightWinchTalonFX.set(Constants.RIGHT_CLIMB_SPEED * Constants.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
-  private void rightClimb() {
+  private void rightRelease() {
     leftWinchTalonFX.set((-1) * Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
     rightWinchTalonFX.set((-1) * Constants.RIGHT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD);
   }
