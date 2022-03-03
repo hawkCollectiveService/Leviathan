@@ -60,12 +60,18 @@ public class ClimberSubsystem extends SubsystemBase {
 
   }
 
+  private void releaseCompression(){
+
+  }
+
   private void leftClimb() {
-    leftWinchTalonFX.set(Constants.LEFT_CLIMB_SPEED);
+    leftWinchTalonFX.set(Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set(Constants.RIGHT_CLIMB_SPEED * Constants.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void rightClimb() {
-    rightWinchTalonFX.set(-Constants.RIGHT_CLIMB_SPEED);
+    leftWinchTalonFX.set((-1) * Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set((-1) * Constants.RIGHT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD);
   }
 
   private void stopClimber() {

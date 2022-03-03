@@ -102,15 +102,6 @@ public final class Constants {
     public static final int XBOX_ASSISTANT_DRIVER_CONTROLLER_ID = 2;
     public static final int XBOX_DRIVER_CONTROLLER_PORT_ID = 3;
 
-    // Xbox analog joystick limiter to prevent drift or continuous running.
-
-    // Xbox analog joystick limiter to prevent drift or continuous running.
-    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
-
-
-    // Xbox analog joystick limiter to prevent drift or continuous running.
-    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
-
     // variables
     public static boolean isTargeting = false;
 
@@ -134,6 +125,9 @@ public final class Constants {
     public static final int RIGHT_FRONT_STEER_POLARITY_MOD = 1;
     public static final int LEFT_BACK_STEER_POLARITY_MOD = 1;
     public static final int RIGHT_BACK_STEER_POLARITY_MOD = 1;
+    public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
+    public static final int LEFT_CLIMBER_POLARITY_MOD = 1;
+    
 
     public static final int DEGREE_TOLERANCE = 3;
 }
