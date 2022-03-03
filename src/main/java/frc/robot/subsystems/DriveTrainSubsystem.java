@@ -33,7 +33,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_gyro.reset();
   }
 
-
   public void drive(double xSpeed, double ySpeed, double rSpeed) {
 
     double speed = 0.5;
@@ -100,8 +99,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
         setModuleSpeed(0.0);
 
     } 
-
-
   }
 
   public void xboxSwerveDrive() {
@@ -145,7 +142,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
         this.rightFrontSwerveModule.orientTo(315, rSpeed * Constants.RIGHT_FRONT_STEER_SPEED_MOD * Constants.RIGHT_FRONT_STEER_POLARITY_MOD);
         this.rightBackSwerveModule.orientTo(45, rSpeed * Constants.RIGHT_BACK_STEER_SPEED_MOD * Constants.RIGHT_BACK_STEER_POLARITY_MOD);
     }
-
   }
 
   public void setModuleSpeed(double speed){
@@ -154,5 +150,4 @@ public class DriveTrainSubsystem extends SubsystemBase {
     this.rightFrontSwerveModule.setDriveSpeed(speed * Constants.RIGHT_FRONT_DRIVE_SPEED_MOD * Constants.RIGHT_FRONT_DRIVE_POLARITY_MOD);
     this.rightBackSwerveModule.setDriveSpeed(speed * Constants.RIGHT_BACK_DRIVE_SPEED_MOD * Constants.RIGHT_BACK_DRIVE_POLARITY_MOD);
   }
-
 }

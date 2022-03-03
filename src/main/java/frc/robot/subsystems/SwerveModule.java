@@ -51,7 +51,6 @@ public class SwerveModule {
   }
 
   public void orientTo(int degree, double speed) {
-    //Steer the wheels to a particular orientation
     double offset = this.m_steerEncoder.getPosition() - degree;
 
     if( Math.abs(offset) > Constants.DEGREE_TOLERANCE){
@@ -63,6 +62,5 @@ public class SwerveModule {
     } else {
       setSteerSpeed(0);
     }
-
   }
 }
