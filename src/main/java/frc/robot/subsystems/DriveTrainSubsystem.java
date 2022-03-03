@@ -125,34 +125,34 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return input > 0;
   }
 
-  public void setModuleOrientation(int degree){
-    this.leftFrontSwerveModule.orientTo(degree);
-    this.leftBackSwerveModule.orientTo(degree);
-    this.rightFrontSwerveModule.orientTo(degree);
-    this.rightBackSwerveModule.orientTo(degree);
+  public void setModuleOrientation(int degree, double rSpeed){
+    this.leftFrontSwerveModule.orientTo(degree, rSpeed * Constants.LEFT_FRONT_STEER_SPEED_MOD * Constants.LEFT_FRONT_STEER_POLARITY_MOD);
+    this.leftBackSwerveModule.orientTo(degree, rSpeed * Constants.LEFT_BACK_STEER_SPEED_MOD * Constants.LEFT_BACK_STEER_POLARITY_MOD);
+    this.rightFrontSwerveModule.orientTo(degree, rSpeed * Constants.RIGHT_FRONT_STEER_SPEED_MOD * Constants.RIGHT_FRONT_STEER_POLARITY_MOD);
+    this.rightBackSwerveModule.orientTo(degree, rSpeed * Constants.RIGHT_BACK_STEER_SPEED_MOD * Constants.RIGHT_BACK_STEER_POLARITY_MOD);
   }
 
   public void setModulesOrientationForRotation(double rSpeed){
 
     if (isPositive(rSpeed)){
-        this.leftFrontSwerveModule.orientTo(45);
-        this.leftBackSwerveModule.orientTo(315);
-        this.rightFrontSwerveModule.orientTo(135);
-        this.rightBackSwerveModule.orientTo(225);
+        this.leftFrontSwerveModule.orientTo(45, rSpeed * Constants.LEFT_FRONT_STEER_SPEED_MOD * Constants.LEFT_FRONT_STEER_POLARITY_MOD);
+        this.leftBackSwerveModule.orientTo(315, rSpeed * Constants.LEFT_BACK_STEER_SPEED_MOD * Constants.LEFT_BACK_STEER_POLARITY_MOD);
+        this.rightFrontSwerveModule.orientTo(135, rSpeed * Constants.RIGHT_FRONT_STEER_SPEED_MOD * Constants.RIGHT_FRONT_STEER_POLARITY_MOD);
+        this.rightBackSwerveModule.orientTo(225, rSpeed * Constants.RIGHT_BACK_STEER_SPEED_MOD * Constants.RIGHT_BACK_STEER_POLARITY_MOD);
     } else {
-        this.leftFrontSwerveModule.orientTo(225);
-        this.leftBackSwerveModule.orientTo(135);
-        this.rightFrontSwerveModule.orientTo(315);
-        this.rightBackSwerveModule.orientTo(45);
+        this.leftFrontSwerveModule.orientTo(225, rSpeed * Constants.LEFT_FRONT_STEER_SPEED_MOD * Constants.LEFT_FRONT_STEER_POLARITY_MOD);
+        this.leftBackSwerveModule.orientTo(135, rSpeed * Constants.LEFT_BACK_STEER_SPEED_MOD * Constants.LEFT_BACK_STEER_POLARITY_MOD);
+        this.rightFrontSwerveModule.orientTo(315, rSpeed * Constants.RIGHT_FRONT_STEER_SPEED_MOD * Constants.RIGHT_FRONT_STEER_POLARITY_MOD);
+        this.rightBackSwerveModule.orientTo(45, rSpeed * Constants.RIGHT_BACK_STEER_SPEED_MOD * Constants.RIGHT_BACK_STEER_POLARITY_MOD);
     }
 
   }
 
   public void setModuleSpeed(double speed){
-    this.leftFrontSwerveModule.setDriveSpeed(speed * Constants.LEFT_FRONT_SPEED_MOD * Constants.LEFT_FRONT_DRIVE_POLARITY_MOD);
-    this.leftBackSwerveModule.setDriveSpeed(speed * Constants.LEFT_BACK_SPEED_MOD * Constants.LEFT_BACK_DRIVE_POLARITY_MOD);
-    this.rightFrontSwerveModule.setDriveSpeed(speed * Constants.RIGHT_FRONT_SPEED_MOD * Constants.RIGHT_FRONT_DRIVE_POLARITY_MOD);
-    this.rightBackSwerveModule.setDriveSpeed(speed * Constants.RIGHT_BACK_SPEED_MOD * Constants.RIGHT_BACK_DRIVE_POLARITY_MOD);
+    this.leftFrontSwerveModule.setDriveSpeed(speed * Constants.LEFT_FRONT_DRIVE_SPEED_MOD * Constants.LEFT_FRONT_DRIVE_POLARITY_MOD);
+    this.leftBackSwerveModule.setDriveSpeed(speed * Constants.LEFT_BACK_DRIVE_SPEED_MOD * Constants.LEFT_BACK_DRIVE_POLARITY_MOD);
+    this.rightFrontSwerveModule.setDriveSpeed(speed * Constants.RIGHT_FRONT_DRIVE_SPEED_MOD * Constants.RIGHT_FRONT_DRIVE_POLARITY_MOD);
+    this.rightBackSwerveModule.setDriveSpeed(speed * Constants.RIGHT_BACK_DRIVE_SPEED_MOD * Constants.RIGHT_BACK_DRIVE_POLARITY_MOD);
   }
 
 }

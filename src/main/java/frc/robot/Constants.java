@@ -103,10 +103,15 @@ public final class Constants {
     public static boolean isTargeting = false;
 
     public static final double DEADZONE_MAGNITUDE = 0.2;
-    public static final double LEFT_FRONT_SPEED_MOD = 0.5;
-    public static final double RIGHT_FRONT_SPEED_MOD = 0.5;
-    public static final double LEFT_BACK_SPEED_MOD = 0.5;
-    public static final double RIGHT_BACK_SPEED_MOD = 0.5;
+    public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 0.5;
+    public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 0.5;
+    public static final double LEFT_BACK_DRIVE_SPEED_MOD = 0.5;
+    public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 0.5;
+
+    public static final double LEFT_FRONT_STEER_SPEED_MOD = 0.5;
+    public static final double RIGHT_FRONT_STEER_SPEED_MOD = 0.5;
+    public static final double LEFT_BACK_STEER_SPEED_MOD = 0.5;
+    public static final double RIGHT_BACK_STEER_SPEED_MOD = 0.5;
 
     public static final int LEFT_FRONT_DRIVE_POLARITY_MOD = 1;
     public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = 1;
@@ -117,4 +122,6 @@ public final class Constants {
     public static final int RIGHT_FRONT_STEER_POLARITY_MOD = 1;
     public static final int LEFT_BACK_STEER_POLARITY_MOD = 1;
     public static final int RIGHT_BACK_STEER_POLARITY_MOD = 1;
+
+    public static final int DEGREE_TOLERANCE = 3;
 }
