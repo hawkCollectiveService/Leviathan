@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import frc.robot.Constants;
 
@@ -17,6 +20,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   private XboxController driverController = new XboxController(Constants.XBOX_DRIVER_CONTROLLER_PORT_ID);
   private XboxController assistantController = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
+
+  private NetworkTableEntry driveLeftX;
+  private NetworkTableEntry driveLeftY;
+  private NetworkTableEntry driveRightX;
 
   private final SwerveModule leftFrontSwerveModule = new SwerveModule(Constants.LEFT_FRONT_SPARK_MAX_ID,
       Constants.LEFT_FRONT_TALON_SRX_ID, "LEFT_FRONT");
@@ -31,6 +38,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem() {
     m_gyro.reset();
+    ShuffleboardTab tab = Shuffleboard.getTab("DriveTrain");
+    driveLeftX = tab.add("Drive Controller Left Stick X", 0).getEntry();
+    driveLeftY = tab.add("Drive Controller Left Stick Y", 0).getEntry();
+    driveRightX = tab.add("Drive Controller Right Stick X", 0).getEntry();
   }
 
   public void drive(double xSpeed, double ySpeed, double rSpeed) {
@@ -106,6 +117,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double driveLeftY = generateDeadZones(driverController.getLeftY());
     double driveLeftX = generateDeadZones(driverController.getLeftX());
     double driveRightX = generateDeadZones(driverController.getRightX());
+
+    this.driveLeftX.setDouble(driveLeftX);
+    this.driveLeftY.setDouble(driveLeftY);
+    this.driveRightX.setDouble(driveRightX);
 
     this.drive(driveLeftX, driveLeftY, driveRightX);
   }
