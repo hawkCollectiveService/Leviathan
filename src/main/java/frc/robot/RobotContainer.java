@@ -6,15 +6,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-// import frc.robot.commands.ExampleCommand;
-// import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-// import frc.robot.subsystems.DriveTrainSubsystem;
-// import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.commands.ClimberCommand;
+import frc.robot.commands.DriveTrainCommand;
+import frc.robot.commands.IntakerCommand;
+import frc.robot.subsystems.IntakerSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -27,22 +28,17 @@ import frc.robot.commands.ClimberCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  // Connects DrivetrainSubsystem and DriveTrainCommand together
-  // private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
+  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  private final IntakerSubsystem intakerSubsystem = new IntakerSubsystem();
+  private final IntakerCommand intakerCommand = new IntakerCommand(intakerSubsystem);
 
-    // Connects ShooterSubsystem and ShooterCommand together
-    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-    private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
-    private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-    private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
-  
-    // Connects ClimberSubsystem and ClimberCommand together
-    // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-    // private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+  // Connects ShooterSubsystem and ShooterCommand together
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -76,6 +72,10 @@ public class RobotContainer {
    */
   public Command getClimberCommand() {
     return m_climberCommand;
+  }
+  
+  public Command getIntakerCommand(){
+    return intakerCommand;
   }
 
 }

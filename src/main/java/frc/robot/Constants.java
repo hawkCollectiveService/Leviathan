@@ -59,8 +59,8 @@ public final class Constants {
     public static final int RIGHT_BACK_SPARK_MAX_ID = 7;
 
     // CAN IDs for Intake
-    public static final int LEFT_INTAKE_ID = 9;
-    public static final int RIGHT_INTAKE_ID = 10;
+    public static final int INTAKE_ID = 9;
+    //public static final int RIGHT_INTAKE_ID = 10;
 
     // CAN IDs for Feeder
     public static final int FEEDER_ID = 11;
@@ -106,6 +106,7 @@ public final class Constants {
 
     // Xbox analog joystick limiter to prevent drift or continuous running.
     public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
+
 
     // variables
     public static boolean isTargeting = false;
