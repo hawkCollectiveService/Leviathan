@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 // import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.commands.ClimberCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -35,6 +37,8 @@ public class RobotContainer {
     // Connects ShooterSubsystem and ShooterCommand together
     private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
     private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+    private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+    private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
   
     // Connects ClimberSubsystem and ClimberCommand together
     // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
@@ -60,22 +64,18 @@ public class RobotContainer {
     System.out.println("DEVCHECK configureButtonBindings");
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    System.out.println("DEVCHECK getAutonomousCommand");
-    // An ExampleCommand will run in autonomous
-    return m_shooterCommand;
-  }
-
  /**
    * Returns the ShooterCommand object to run Shooter during teleop
    */
   public Command getShooterCommand() {
     return m_shooterCommand;
+  }
+
+ /**
+   * Returns the ClimberCommand object to run Climber during teleop
+   */
+  public Command getClimberCommand() {
+    return m_climberCommand;
   }
 
 }

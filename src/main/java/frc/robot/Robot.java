@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_robotContainer.getShooterCommand().execute();
-
+    m_robotContainer.getClimberCommand().execute();
   }
 
   @Override

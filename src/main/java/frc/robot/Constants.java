@@ -86,6 +86,8 @@ public final class Constants {
     public static final double SHOOTER_HIGH_SPEED = 0.5;
     public static final double INTAKE_SPEED = 0.275;
     public static final double FEEDER_SPEED = 0.275;
+    public static final double LEFT_CLIMB_SPEED = 0.25;
+    public static final double RIGHT_CLIMB_SPEED = 0.5;
 
 
     /**
@@ -101,6 +103,9 @@ public final class Constants {
     public static final int XBOX_DRIVER_CONTROLLER_PORT_ID = 3;
 
     // Xbox analog joystick limiter to prevent drift or continuous running.
+
+    // Xbox analog joystick limiter to prevent drift or continuous running.
+    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
 
     // variables
     public static boolean isTargeting = false;
