@@ -6,13 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+// import frc.robot.commands.ExampleCommand;
+// import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.commands.DriveTrainCommand;
-// import frc.robot.subsystems.ClimberSubsystem;
-// import frc.robot.commands.ClimberCommand;
+// import frc.robot.subsystems.DriveTrainSubsystem;
+// import frc.robot.commands.DriveTrainCommand;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.commands.ShooterCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,14 +25,17 @@ import frc.robot.commands.DriveTrainCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Connects DrivetrainSubsystem and DriveTrainCommand together
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  // private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
+  // private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
 
+    // Connects ShooterSubsystem and ShooterCommand together
+    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+    private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+  
     // Connects ClimberSubsystem and ClimberCommand together
     // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
     // private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
@@ -65,22 +68,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     System.out.println("DEVCHECK getAutonomousCommand");
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_shooterCommand;
   }
 
-  /**
-   * Returns the DriveTrainCommand object to run drive train during teleop
+ /**
+   * Returns the ShooterCommand object to run Shooter during teleop
    */
-  public Command getDriveTrainCommand() {
-    // System.out.println("DRIVE TRAIN");
-    return m_driveTrainCommand;
+  public Command getShooterCommand() {
+    return m_shooterCommand;
   }
 
-    /**
-   * Returns the ClimberCommand object to run drive train during teleop
-   */
-  // public Command getClimberCommand() {
-  //   // System.out.println("DEVCHECK: Climber");
-  //   return m_climberCommand;
-  // }
 }

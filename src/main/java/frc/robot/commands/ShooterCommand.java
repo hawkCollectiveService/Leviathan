@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class ClimberCommand extends CommandBase {
-  private final ClimberSubsystem m_climberSubsystem;
+public class ShooterCommand extends CommandBase {
+  private final ShooterSubsystem shooterSubsystem;
   /**
    * Creates a new ClimberCommand.
    */
-  public ClimberCommand(ClimberSubsystem subsystem) {
+  public ShooterCommand(ShooterSubsystem subsystem) {
 
     // Use addRequirements() here to declare subsystem dependencies.
-    m_climberSubsystem = subsystem;
+    shooterSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -32,9 +32,7 @@ public class ClimberCommand extends CommandBase {
   // Calls which drive mode we're going to use during competitions
   @Override
   public void execute() {
-    //System.out.println("DEVCHECK ClimberCommand.execute"); // floods the RioLog. be careful
-    //m_driveTrainSubsystem.joystickArcadeDrive();
-    m_climberSubsystem.xboxArcadeDrive();
+    shooterSubsystem.shoot();
   }
 
   // Called once the command ends or is interrupted.
