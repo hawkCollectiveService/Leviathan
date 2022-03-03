@@ -19,13 +19,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private XboxController assistantController = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
 
   private final SwerveModule leftFrontSwerveModule = new SwerveModule(Constants.LEFT_FRONT_SPARK_MAX_ID,
-      Constants.LEFT_FRONT_TALON_SRX_ID);
+      Constants.LEFT_FRONT_TALON_SRX_ID, "LEFT_FRONT");
   private final SwerveModule rightFrontSwerveModule = new SwerveModule(Constants.RIGHT_FRONT_SPARK_MAX_ID,
-      Constants.RIGHT_FRONT_TALON_SRX_ID);
+      Constants.RIGHT_FRONT_TALON_SRX_ID, "RIGHT_FRONT");
   private final SwerveModule leftBackSwerveModule = new SwerveModule(Constants.LEFT_BACK_SPARK_MAX_ID,
-      Constants.LEFT_BACK_TALON_SRX_ID);
+      Constants.LEFT_BACK_TALON_SRX_ID, "LEFT_BACK");
   private final SwerveModule rightBackSwerveModule = new SwerveModule(Constants.RIGHT_BACK_SPARK_MAX_ID,
-      Constants.RIGHT_BACK_TALON_SRX_ID);
+      Constants.RIGHT_BACK_TALON_SRX_ID, "RIGHT_BACK");
 
   private final AnalogGyro m_gyro = new AnalogGyro(Constants.GYRO_PORT);
 
