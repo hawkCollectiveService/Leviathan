@@ -36,7 +36,7 @@ public class DriveTrainCommand extends CommandBase {
     counter++;
     if ((counter % 1000)==0) System.out.println("DEVCHECK DriveTrainCommand.execute"); // floods the RioLog. be careful
     //m_driveTrainSubsystem.joystickArcadeDrive();
-    m_driveTrainSubsystem.xboxSwerveDrive(false);
+    m_driveTrainSubsystem.xboxSwerveDrive();
   }
 
   // Called once the command ends or is interrupted.
