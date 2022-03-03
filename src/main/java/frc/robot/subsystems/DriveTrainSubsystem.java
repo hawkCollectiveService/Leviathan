@@ -18,6 +18,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public static final double kMaxSpeed = 3.0; // 3 meters per second
   public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
 
+  /**
+   * Xbox controller object used in the case the driver drives with an Xbox
+   * controller
+   */
   private XboxController driverController = new XboxController(Constants.XBOX_DRIVER_CONTROLLER_PORT_ID);
   private XboxController assistantController = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
 

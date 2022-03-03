@@ -108,6 +108,9 @@ public final class Constants {
     public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
 
 
+    // Xbox analog joystick limiter to prevent drift or continuous running.
+    public static final double XBOX_DRIVER_ANALOG_LIMITER = 0.2;
+
     // variables
     public static boolean isTargeting = false;
 

@@ -12,6 +12,12 @@ import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.commands.ClimberCommand;
+// import frc.robot.commands.ExampleCommand;
+// import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.AutonomousSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.commands.IntakerCommand;
 import frc.robot.subsystems.IntakerSubsystem;
@@ -28,7 +34,10 @@ import frc.robot.subsystems.IntakerSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  // Connects DrivetrainSubsystem and DriveTrainCommand together
   private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
   private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
   private final IntakerSubsystem intakerSubsystem = new IntakerSubsystem();
@@ -39,6 +48,14 @@ public class RobotContainer {
   private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
+  // Creates an autonomous subsystem and command
+  private final AutonomousSubsystem m_autonomousSubsystem = new AutonomousSubsystem();
+  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(m_autonomousSubsystem);
+
+  // Connects ClimberSubsystem and ClimberCommand together
+  // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  // private final ClimberCommand m_climberCommand = new
+  // ClimberCommand(m_climberSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -67,8 +84,14 @@ public class RobotContainer {
     return m_shooterCommand;
   }
 
+  public Command getDriveTrainCommand(){
+    return m_driveTrainCommand;
+  }
+
  /**
    * Returns the ClimberCommand object to run Climber during teleop
+  /**
+   * Returns the DriveTrainCommand object to run drive train during teleop
    */
   public Command getClimberCommand() {
     return m_climberCommand;
@@ -78,4 +101,14 @@ public class RobotContainer {
     return intakerCommand;
   }
 
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // Command will run in autonomous
+    return m_autonomousCommand;
+  }
 }

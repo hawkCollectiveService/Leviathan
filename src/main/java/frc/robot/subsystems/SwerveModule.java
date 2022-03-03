@@ -13,6 +13,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
+@SuppressWarnings("unused")
 public class SwerveModule {
 
   private static final double kWheelRadius = Constants.RADIUS_OF_WHEEL;
