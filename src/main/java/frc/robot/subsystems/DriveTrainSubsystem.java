@@ -43,22 +43,22 @@ public class DriveTrainSubsystem extends SubsystemBase {
         //Driving Logic
         if (isPositive(xSpeed) && isPositive(ySpeed)){
 
-            setModuleOrientation(45);
+            setModuleOrientation(45, speed);
             setModuleSpeed(speed);
 
         } else if (!isPositive(xSpeed) && !isPositive(ySpeed)) {
 
-            setModuleOrientation(225);
+            setModuleOrientation(225, speed);
             setModuleSpeed(speed);
             
         } else if (!isPositive(xSpeed) && isPositive(ySpeed)) {
 
-            setModuleOrientation(315);
+            setModuleOrientation(315, speed);
             setModuleSpeed(speed);
             
         } else if (isPositive(xSpeed) && !isPositive(ySpeed)) {
 
-            setModuleOrientation(135);
+            setModuleOrientation(135, speed);
             setModuleSpeed(speed);
             
         }
@@ -67,12 +67,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
         if(isPositive(ySpeed)){
 
-            setModuleOrientation(0);
+            setModuleOrientation(0, speed);
             setModuleSpeed(speed);
 
         } else {
 
-            setModuleOrientation(180);
+            setModuleOrientation(180, speed);
             setModuleSpeed(speed);
 
         }
@@ -81,12 +81,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
         if(isPositive(xSpeed)){
 
-            setModuleOrientation(90);
+            setModuleOrientation(90, speed);
             setModuleSpeed(speed);
 
         } else {
 
-            setModuleOrientation(270);
+            setModuleOrientation(270, speed);
             setModuleSpeed(speed);
 
         }
