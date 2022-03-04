@@ -7,15 +7,33 @@
 
 package frc.robot.subsystems;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Shuffle;
 
 @SuppressWarnings("unused")
 public class ShooterSubsystem extends SubsystemBase {
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+  public NetworkTableEntry lowShooterSpeed = tab.add("Low Shooter Speed", 1.0)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
+  public NetworkTableEntry highShooterSpeed = tab.add("High Shooter Speed", 1.0)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
+  public NetworkTableEntry feederSpeed = tab.add("Feeder Speed", 1.0)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
   /**
    * TalonFX Controllers - for Shooter
@@ -31,8 +49,8 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Xbox controller object used in the case the driver drives with an Xbox
    * controller
-   *    XButton for shoot Low
-   *    YButton for shoot High
+   * XButton for shoot Low
+   * YButton for shoot High
    */
   private XboxController assistantDriverController = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
 
@@ -40,7 +58,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ShooterSubsystem() {
-    shootStop();  // default state.
+    shootStop(); // default state.
   }
 
   /**
@@ -67,25 +85,25 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     // Temporary stop for the shooter
-    if (assistantDriverController.getXButtonReleased() 
-    || assistantDriverController.getYButtonReleased() ) {
+    if (assistantDriverController.getXButtonReleased()
+        || assistantDriverController.getYButtonReleased()) {
       shootStop();
     }
 
-    if (assistantDriverController.getBButtonReleased())  {
+    if (assistantDriverController.getBButtonReleased()) {
       stopFeeder();
     }
 
   }
 
   private void shootHigh() {
-    shooterFrontTalonSRX.set(Shuffle.highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
-    shooterBackTalonSRX.set(-1 * Shuffle.highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
+    shooterFrontTalonSRX.set(highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
+    shooterBackTalonSRX.set(-1 * highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
   }
 
   private void shootLow() {
-    shooterFrontTalonSRX.set(Shuffle.lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
-    shooterBackTalonSRX.set(-1 * Shuffle.lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
+    shooterFrontTalonSRX.set(lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
+    shooterBackTalonSRX.set(-1 * lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
   }
 
   private void shootStop() {
@@ -95,7 +113,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   private void startFeeder() {
-    feederTalonSRX.set(Shuffle.feederSpeed.getDouble(Constants.FEEDER_SPEED));
+    feederTalonSRX.set(feederSpeed.getDouble(Constants.FEEDER_SPEED));
   }
 
   private void stopFeeder() {
