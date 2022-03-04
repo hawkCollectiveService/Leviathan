@@ -50,7 +50,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void drive(double xSpeed, double ySpeed, double rSpeed) {
 
-    double speed = 0.5;
+    double speed = 1;
 
     if (xSpeed != 0 && ySpeed !=0){
 
@@ -112,6 +112,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     } else if (xSpeed == 0 && ySpeed == 0 && rSpeed == 0) {
 
         setModuleSpeed(0.0);
+        stopTurns();
 
     } 
   }
@@ -130,7 +131,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   
   public double generateDeadZones(double input){
-    if (input < Math.abs(Constants.DEADZONE_MAGNITUDE)) {
+    if (Math.abs(input) < Constants.DEADZONE_MAGNITUDE) {
         return 0.0;
     } else {
         return input;
@@ -168,5 +169,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     this.leftBackSwerveModule.setDriveSpeed(speed * Constants.LEFT_BACK_DRIVE_SPEED_MOD * Constants.LEFT_BACK_DRIVE_POLARITY_MOD);
     this.rightFrontSwerveModule.setDriveSpeed(speed * Constants.RIGHT_FRONT_DRIVE_SPEED_MOD * Constants.RIGHT_FRONT_DRIVE_POLARITY_MOD);
     this.rightBackSwerveModule.setDriveSpeed(speed * Constants.RIGHT_BACK_DRIVE_SPEED_MOD * Constants.RIGHT_BACK_DRIVE_POLARITY_MOD);
+  }
+
+  public void stopTurns(){
+    this.leftFrontSwerveModule.setSteerSpeed(0.0);
+    this.leftBackSwerveModule.setSteerSpeed(0.0);
+    this.rightFrontSwerveModule.setSteerSpeed(0.0);
+    this.rightBackSwerveModule.setSteerSpeed(0.0);
   }
 }

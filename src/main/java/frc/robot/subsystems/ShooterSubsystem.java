@@ -94,7 +94,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   private void startFeeder() {
-    feederTalonSRX.set(Constants.FEEDER_SPEED);
+    feederTalonSRX.set(Constants.FEEDER_SPEED * 2);
   }
 
   private void stopFeeder() {

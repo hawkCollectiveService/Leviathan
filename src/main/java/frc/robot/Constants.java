@@ -82,8 +82,8 @@ public final class Constants {
     public static final double NO_SPEED = 0.0;
     public static final double LIFT_CONTROLLER_RELEASE_SPEED = 0.25;
     public static final double LIFT_CONTROLLER_INTAKE_SPEED = -0.25;
-    public static final double SHOOTER_LOW_SPEED = 0.25;
-    public static final double SHOOTER_HIGH_SPEED = 0.5;
+    public static final double SHOOTER_LOW_SPEED = 0.6;
+    public static final double SHOOTER_HIGH_SPEED = 0.8;
     public static final double INTAKE_SPEED = 0.125;
     public static final double FEEDER_SPEED = 0.55;
     public static final double LEFT_CLIMB_SPEED = 0.25;
@@ -106,19 +106,19 @@ public final class Constants {
     public static boolean isTargeting = false;
 
     public static final double DEADZONE_MAGNITUDE = 0.2;
-    public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 0.5;
-    public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 0.5;
-    public static final double LEFT_BACK_DRIVE_SPEED_MOD = 0.5;
-    public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 0.5;
+    public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 6;
+    public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 6;
+    public static final double LEFT_BACK_DRIVE_SPEED_MOD = 6;
+    public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 6;
 
-    public static final double LEFT_FRONT_STEER_SPEED_MOD = 0.5;
-    public static final double RIGHT_FRONT_STEER_SPEED_MOD = 0.5;
-    public static final double LEFT_BACK_STEER_SPEED_MOD = 0.5;
-    public static final double RIGHT_BACK_STEER_SPEED_MOD = 0.5;
+    public static final double LEFT_FRONT_STEER_SPEED_MOD = 4;
+    public static final double RIGHT_FRONT_STEER_SPEED_MOD = 4;
+    public static final double LEFT_BACK_STEER_SPEED_MOD = 4;
+    public static final double RIGHT_BACK_STEER_SPEED_MOD = 4;
 
     public static final int LEFT_FRONT_DRIVE_POLARITY_MOD = 1;
-    public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = 1;
-    public static final int LEFT_BACK_DRIVE_POLARITY_MOD = 1;
+    public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = -1;
+    public static final int LEFT_BACK_DRIVE_POLARITY_MOD = -1;
     public static final int RIGHT_BACK_DRIVE_POLARITY_MOD = 1;
 
     public static final int LEFT_FRONT_STEER_POLARITY_MOD = 1;
