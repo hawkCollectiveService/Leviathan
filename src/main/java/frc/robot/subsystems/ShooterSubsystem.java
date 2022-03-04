@@ -96,17 +96,17 @@ public class ShooterSubsystem extends SubsystemBase {
 
   }
 
-  private void shootHigh() {
+  public void shootHigh() {
     shooterFrontTalonSRX.set(highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
     shooterBackTalonSRX.set(-1 * highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
   }
 
-  private void shootLow() {
+  public void shootLow() {
     shooterFrontTalonSRX.set(lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
     shooterBackTalonSRX.set(-1 * lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
   }
 
-  private void shootStop() {
+  public void shootStop() {
     shooterFrontTalonSRX.set(Constants.NO_SPEED);
     shooterBackTalonSRX.set(Constants.NO_SPEED);
     stopFeeder();
