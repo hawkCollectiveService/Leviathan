@@ -21,6 +21,7 @@ public class ClimberSubsystem extends SubsystemBase {
    */
   private WPI_TalonFX leftWinchTalonFX = new WPI_TalonFX(Constants.LEFT_WINCH_TALON_FX_ID);
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.RIGHT_WINCH_TALON_FX_ID);
+  private boolean hasLifted = false;
 
   /**
    * Xbox controller object used in the case the driver drives with an Xbox
@@ -46,26 +47,24 @@ public class ClimberSubsystem extends SubsystemBase {
 
     // If the LeftBumper and RightBumper are pressed,
     // the Climb Left process will begin.
-    if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed())
-      leftClimb();
-    else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed())
-      rightRelease();
+    if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed()){
+      extend();
+      hasLifted = true;
+    }
+    else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed() && hasLifted)
+      contract();
     else if (assistantDriverController.getLeftBumperReleased())
       stopClimber();
     else if (assistantDriverController.getRightBumperReleased())
       stopClimber();
   }
 
-  private void releaseCompression(){
-
-  }
-
-  private void leftClimb() {
+  private void extend() {
     leftWinchTalonFX.set(Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
     rightWinchTalonFX.set(Constants.RIGHT_CLIMB_SPEED * Constants.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
-  private void rightRelease() {
+  private void contract() {
     leftWinchTalonFX.set((-1) * Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
     rightWinchTalonFX.set((-1) * Constants.RIGHT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD);
   }

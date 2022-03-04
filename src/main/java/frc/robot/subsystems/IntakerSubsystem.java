@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Shuffle;
 
 public class IntakerSubsystem extends SubsystemBase {
 
@@ -25,7 +26,7 @@ public class IntakerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     if (assistantDriver.getAButtonPressed())
     {
-      intakeTalon.set(Constants.INTAKE_SPEED * Constants.INTAKE_POLARITY_MOD);
+      intakeTalon.set(Shuffle.intakeSpeed.getDouble(Constants.INTAKE_SPEED) * Constants.INTAKE_POLARITY_MOD);
     }
     if (assistantDriver.getAButtonReleased())
     {

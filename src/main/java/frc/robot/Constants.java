@@ -6,6 +6,10 @@ package frc.robot;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -106,15 +110,15 @@ public final class Constants {
     public static boolean isTargeting = false;
 
     public static final double DEADZONE_MAGNITUDE = 0.2;
-    public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 6 / 6;
-    public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 6 / 6;
-    public static final double LEFT_BACK_DRIVE_SPEED_MOD = 6 / 6;
-    public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 6 / 6;
+    public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 6;
+    public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 6;
+    public static final double LEFT_BACK_DRIVE_SPEED_MOD = 6;
+    public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 6;
 
-    public static final double LEFT_FRONT_STEER_SPEED_MOD = 3;
-    public static final double RIGHT_FRONT_STEER_SPEED_MOD = 4;
-    public static final double LEFT_BACK_STEER_SPEED_MOD = 4;
-    public static final double RIGHT_BACK_STEER_SPEED_MOD = 4;
+    public static final double LEFT_FRONT_STEER_SPEED_MOD = 0;
+    public static final double RIGHT_FRONT_STEER_SPEED_MOD = 0;
+    public static final double LEFT_BACK_STEER_SPEED_MOD = 0;
+    public static final double RIGHT_BACK_STEER_SPEED_MOD = 0;
 
     public static final int LEFT_FRONT_DRIVE_POLARITY_MOD = 1;
     public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = -1;
@@ -125,8 +129,9 @@ public final class Constants {
     public static final int RIGHT_FRONT_STEER_POLARITY_MOD = -1;
     public static final int LEFT_BACK_STEER_POLARITY_MOD = -1;
     public static final int RIGHT_BACK_STEER_POLARITY_MOD = -1;
-    public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
-    public static final int LEFT_CLIMBER_POLARITY_MOD = 1;
+
+    public static final int RIGHT_CLIMBER_POLARITY_MOD = -1;
+    public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
     public static final int INTAKE_POLARITY_MOD = -1;
 
     public static final int XBOX_POLARITY_MOD = -1;

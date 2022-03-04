@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -20,6 +21,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private edu.wpi.first.cscore.UsbCamera intakeCamera = CameraServer.getInstance().startAutomaticCapture();
+  private edu.wpi.first.cscore.UsbCamera liftCamera = CameraServer.getInstance().startAutomaticCapture();
 
   public static SendableChooser<String> startingPositionChooser = new SendableChooser<>();
 
@@ -38,6 +42,9 @@ public class Robot extends TimedRobot {
     startingPositionChooser.addOption("Move Off Line", "Move");
     startingPositionChooser.addOption("Shoot", "Shoot");
     startingPositionChooser.addOption("Test", "Test");
+
+    Shuffleboard.getTab("Main").add("Lift Camera", liftCamera);
+    Shuffleboard.getTab("Main").add("Intak Camera", intakeCamera);
   }
 
   /**

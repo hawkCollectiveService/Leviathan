@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Shuffle;
 
 @SuppressWarnings("unused")
 public class ShooterSubsystem extends SubsystemBase {
@@ -78,13 +79,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   private void shootHigh() {
-    shooterFrontTalonSRX.set(Constants.SHOOTER_HIGH_SPEED);
-    shooterBackTalonSRX.set(-Constants.SHOOTER_HIGH_SPEED);
+    shooterFrontTalonSRX.set(Shuffle.highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
+    shooterBackTalonSRX.set(-1 * Shuffle.highShooterSpeed.getDouble(Constants.SHOOTER_HIGH_SPEED));
   }
 
   private void shootLow() {
-    shooterFrontTalonSRX.set(Constants.SHOOTER_LOW_SPEED);
-    shooterBackTalonSRX.set(-Constants.SHOOTER_LOW_SPEED);
+    shooterFrontTalonSRX.set(Shuffle.lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
+    shooterBackTalonSRX.set(-1 * Shuffle.lowShooterSpeed.getDouble(Constants.SHOOTER_LOW_SPEED));
   }
 
   private void shootStop() {
@@ -94,7 +95,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   private void startFeeder() {
-    feederTalonSRX.set(Constants.FEEDER_SPEED * 2);
+    feederTalonSRX.set(Shuffle.feederSpeed.getDouble(Constants.FEEDER_SPEED));
   }
 
   private void stopFeeder() {
