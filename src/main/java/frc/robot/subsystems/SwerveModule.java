@@ -28,8 +28,11 @@ public class SwerveModule {
   private NetworkTableEntry driveVoltage;
   private NetworkTableEntry steerVoltage;
 
+  private String name;
 
   public SwerveModule(int driveMotorID, int steerMotorID, String name) {
+    this.name = name;
+
     ShuffleboardTab tab = Shuffleboard.getTab(name + " Swerve Module");
     driveEncoder = tab.add("driveEncoderValue", 0).getEntry();
     steerEncoder = tab.add("steerEncoderValue", 0).getEntry();
@@ -41,6 +44,7 @@ public class SwerveModule {
 
     m_driveEncoder = m_driveMotor.getEncoder();
     m_steerEncoder = new WPI_CANCoder(steerMotorID);
+    resetEncoders();
   }
 
   public double getDriveEncoder() {
@@ -49,8 +53,14 @@ public class SwerveModule {
   }
 
   public double getSteerEncoder() {
-    steerEncoder.setDouble(this.m_steerEncoder.getPosition());
-    return this.m_steerEncoder.getPosition();
+    steerEncoder.setDouble(Math.abs(m_steerMotor.getSensorCollection().getAnalogIn()));
+    //System.out.println("SteerEncoder for " + this.name + " has pos " + m_steerMotor.getSelectedSensorPosition());
+    return Math.abs(m_steerMotor.getSensorCollection().getAnalogIn());
+  }
+
+  public void resetEncoders() {
+    this.m_steerMotor.getSensorCollection().setAnalogPosition(0, 1000);
+    this.m_steerMotor.setStatusFramePeriod(4, 1);
   }
   
   public void setDriveSpeed(double driveSpeed) {
@@ -63,17 +73,25 @@ public class SwerveModule {
     m_steerMotor.setVoltage(steerSpeed);
   }
 
-  public void orientTo(int degree, double speed) {
-    double offset = this.m_steerEncoder.getPosition() - degree;
+  public boolean orientTo(int degree, double speed, boolean allowSignal) {
+    int scale = (int)getSteerEncoder() / 360;
+    int desired = 360 * scale + degree;
 
-    if( Math.abs(offset) > Constants.DEGREE_TOLERANCE){
-      if(offset > 0) {
-        setSteerSpeed(-1 * speed);
-      } else {
+    double offset = getSteerEncoder() - desired;
+
+    System.out.println("Scale " + scale + "Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
+
+    if( Math.abs(offset) > Constants.DEGREE_TOLERANCE && allowSignal){
+      // if(offset > 0) {
+      //   setSteerSpeed(-1 * speed);
+      //   return true;
+      // } else {
         setSteerSpeed(speed);
-      }
+        return true;
+      //}
     } else {
       setSteerSpeed(0);
+      return false;
     }
   }
 }
