@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  private static RobotContainer m_robotContainer;
 
   private edu.wpi.first.cscore.UsbCamera intakeCamera = CameraServer.getInstance().startAutomaticCapture();
   private edu.wpi.first.cscore.UsbCamera liftCamera = CameraServer.getInstance().startAutomaticCapture();
@@ -33,11 +33,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    CommandScheduler.getInstance().cancelAll();  // 2022-03-05 @10:25
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     System.out.println("DEVCHECK robotInit");
-
     
     startingPositionChooser.addOption("Move Off Line", "Move");
     startingPositionChooser.addOption("Shoot", "Shoot");
@@ -119,4 +119,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  public static RobotContainer getRobotContainer() {
+    return m_robotContainer;
+  }
 }

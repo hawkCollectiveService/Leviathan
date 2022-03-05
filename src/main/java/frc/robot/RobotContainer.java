@@ -101,7 +101,6 @@ public class RobotContainer {
     return intakerCommand;
   }
 
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -110,5 +109,13 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // Command will run in autonomous
     return m_autonomousCommand;
+  }
+
+  public DriveTrainSubsystem getDriveTrainSubsystem() {
+    return this.m_driveTrainSubsystem;
+  }
+
+  public ShooterSubsystem getShooterSubsystem() {
+    return this.m_shooterSubsystem;
   }
 }
