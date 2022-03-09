@@ -7,18 +7,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.commands.ClimberCommand; import frc.robot.commands.ExampleCommand; import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.AutonomousSubsystem;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.commands.IntakerCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.AutonomousSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
 /**
