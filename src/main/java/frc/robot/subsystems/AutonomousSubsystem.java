@@ -55,7 +55,7 @@ public class AutonomousSubsystem extends SubsystemBase {
     // 3. Back-up 6-feet (1.0 secs)
     RobotContainer robotContainer = Robot.getRobotContainer();
 
-<<<<<<< HEAD
+    // 2022-03-05 - commented out at competition #1.
     // m_driveTrainSubsystem.drive(-1, -1);
     // Timer.delay(0.5);
     // m_driveTrainSubsystem.drive(0, 0);
@@ -65,17 +65,6 @@ public class AutonomousSubsystem extends SubsystemBase {
     // m_driveTrainSubsystem.drive(-1, -1);
     // Timer.delay(2);
     // m_driveTrainSubsystem.drive(0, 0);
-=======
-    robotContainer.getDriveTrainSubsystem().drive(-1, -1);
-    Timer.delay(0.5);
-    robotContainer.getDriveTrainSubsystem().drive(0, 0);
-    robotContainer.getShooterSubsystem().shootHigh();
-    Timer.delay(3);
-    robotContainer.getShooterSubsystem().shootStop();
-    robotContainer.getDriveTrainSubsystem().drive(-1, -1);
-    Timer.delay(2);
-    robotContainer.getDriveTrainSubsystem().drive(0, 0);
->>>>>>> 84a1ca3edf1792e35dad39c332920cd19d90e58c
 
   }
 
