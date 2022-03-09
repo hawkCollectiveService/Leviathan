@@ -35,7 +35,7 @@ public class ClimberSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
-    stopClimber(); // default state.
+  //  stopClimber(); // default state.
   }
 
   /**

@@ -131,7 +131,7 @@ public final class Constants {
     public static final int RIGHT_BACK_STEER_POLARITY_MOD = -1;
 
     public static final int RIGHT_CLIMBER_POLARITY_MOD = -1;
-    public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
+    public static final int LEFT_CLIMBER_POLARITY_MOD = 1;
     public static final int INTAKE_POLARITY_MOD = -1;
 
     public static final int XBOX_POLARITY_MOD = -1;

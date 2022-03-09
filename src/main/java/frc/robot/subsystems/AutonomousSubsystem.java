@@ -25,8 +25,8 @@ import edu.wpi.first.wpilibj.Timer;
 @SuppressWarnings("unused")
 public class AutonomousSubsystem extends SubsystemBase {
 
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  //private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
+  //private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
   private boolean startUpCheck = true;
 
@@ -45,7 +45,7 @@ public class AutonomousSubsystem extends SubsystemBase {
    */
   public void autonomous() {
     // Gather selection from Shuffleboard that was declared in Robot
-    String choice = Robot.startingPositionChooser.getSelected();
+    //String choice = Robot.startingPositionChooser.getSelected();
 
     // Logic:
     // Autonomous Logic (constraint: 15 Secs)
@@ -53,15 +53,15 @@ public class AutonomousSubsystem extends SubsystemBase {
     // 2. Shoot Low
     // 3. Back-up 6-feet (1.0 secs)
 
-    m_driveTrainSubsystem.drive(-1, -1);
-    Timer.delay(0.5);
-    m_driveTrainSubsystem.drive(0, 0);
-    m_shooterSubsystem.shootHigh();
-    Timer.delay(3);
-    m_shooterSubsystem.shootStop();
-    m_driveTrainSubsystem.drive(-1, -1);
-    Timer.delay(2);
-    m_driveTrainSubsystem.drive(0, 0);
+    // m_driveTrainSubsystem.drive(-1, -1);
+    // Timer.delay(0.5);
+    // m_driveTrainSubsystem.drive(0, 0);
+    // m_shooterSubsystem.shootHigh();
+    // Timer.delay(3);
+    // m_shooterSubsystem.shootStop();
+    // m_driveTrainSubsystem.drive(-1, -1);
+    // Timer.delay(2);
+    // m_driveTrainSubsystem.drive(0, 0);
 
   }
 
