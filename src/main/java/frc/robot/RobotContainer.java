@@ -29,35 +29,31 @@ import frc.robot.subsystems.ShooterSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Connects DrivetrainSubsystem and DriveTrainCommand together
-  private final DriveTrainSubsystem m_driveTrainSubsystem = new DriveTrainSubsystem();
-  private final DriveTrainCommand m_driveTrainCommand = new DriveTrainCommand(m_driveTrainSubsystem);
+  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
+  private final DriveTrainCommand driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
+  
+  // Connects the IntakerSubsystem and IntakerCommand together
   private final IntakerSubsystem intakerSubsystem = new IntakerSubsystem();
   private final IntakerCommand intakerCommand = new IntakerCommand(intakerSubsystem);
 
   // Connects ShooterSubsystem and ShooterCommand together
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final ClimberCommand m_climberCommand = new ClimberCommand(m_climberSubsystem);
-  // Creates an autonomous subsystem and command
-  private final AutonomousSubsystem m_autonomousSubsystem = new AutonomousSubsystem();
-  private final AutonomousCommand m_autonomousCommand = new AutonomousCommand(m_autonomousSubsystem);
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem);
 
   // Connects ClimberSubsystem and ClimberCommand together
-  //private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  //private final ClimberCommand m_climberCommand = new
-  // ClimberCommand(m_climberSubsystem);
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  private final ClimberCommand climberCommand = new ClimberCommand(climberSubsystem);
+
+  // Connects AutonomousSubsystem and AutonomousCommand together
+  private final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem();
+  private final AutonomousCommand autonomousCommand = new AutonomousCommand(autonomousSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
   }
 
@@ -73,45 +69,31 @@ public class RobotContainer {
     System.out.println("DEVCHECK configureButtonBindings");
   }
 
- /**
-   * Returns the ShooterCommand object to run Shooter during teleop
-   */
   public Command getShooterCommand() {
-    return m_shooterCommand;
+    return shooterCommand;
   }
 
   public Command getDriveTrainCommand(){
-    return m_driveTrainCommand;
+    return driveTrainCommand;
   }
 
- /**
-   * Returns the ClimberCommand object to run Climber during teleop
-  /**
-   * Returns the DriveTrainCommand object to run drive train during teleop
-   */
   public Command getClimberCommand() {
-    return m_climberCommand;
+    return climberCommand;
   }
 
   public Command getIntakerCommand(){
     return intakerCommand;
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
-    // Command will run in autonomous
-    return m_autonomousCommand;
+    return autonomousCommand;
   }
 
   public DriveTrainSubsystem getDriveTrainSubsystem() {
-    return this.m_driveTrainSubsystem;
+    return this.driveTrainSubsystem;
   }
 
   public ShooterSubsystem getShooterSubsystem() {
-    return this.m_shooterSubsystem;
+    return this.shooterSubsystem;
   }
 }

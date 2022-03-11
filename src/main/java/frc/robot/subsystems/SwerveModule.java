@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 @SuppressWarnings("unused")
 public class SwerveModule {
 
-  private static final double kWheelRadius = Constants.RADIUS_OF_WHEEL;
+  private static final double kWheelRadius = Constants.Swerve.RADIUS_OF_WHEEL;
 
-  private final CANSparkMax m_driveMotor;
-  private final WPI_TalonSRX m_steerMotor;
-  private final RelativeEncoder m_driveEncoder;
-  private final WPI_CANCoder m_steerEncoder;
+  private final CANSparkMax driveMotor;
+  private final WPI_TalonSRX steerMotor;
+  private final RelativeEncoder driveEncoder;
+  private final WPI_CANCoder steerEncoder;
 
-  private NetworkTableEntry driveEncoder;
-  private NetworkTableEntry steerEncoder;
+  private NetworkTableEntry driveEncoderUI;
+  private NetworkTableEntry steerEncoderUI;
   private NetworkTableEntry driveVoltage;
   private NetworkTableEntry steerVoltage;
 
@@ -34,43 +34,42 @@ public class SwerveModule {
     this.name = name;
 
     ShuffleboardTab tab = Shuffleboard.getTab(name + " Swerve Module");
-    driveEncoder = tab.add("driveEncoderValue", 0).getEntry();
-    steerEncoder = tab.add("steerEncoderValue", 0).getEntry();
+    driveEncoderUI = tab.add("driveEncoderValue", 0).getEntry();
+    steerEncoderUI = tab.add("steerEncoderValue", 0).getEntry();
     driveVoltage = tab.add("driveMotorVoltage", 0).getEntry();
     steerVoltage = tab.add("steerMotorVoltage", 0).getEntry();
 
-    m_driveMotor = new CANSparkMax(driveMotorID, Constants.BRUSHLESS_MOTOR);
-    m_steerMotor = new WPI_TalonSRX(steerMotorID);
+    driveMotor = new CANSparkMax(driveMotorID, Constants.Chassis.BRUSHLESS_MOTOR);
+    steerMotor = new WPI_TalonSRX(steerMotorID);
 
-    m_driveEncoder = m_driveMotor.getEncoder();
-    m_steerEncoder = new WPI_CANCoder(steerMotorID);
+    driveEncoder = driveMotor.getEncoder();
+    steerEncoder = new WPI_CANCoder(steerMotorID);
     resetEncoders();
   }
 
+  public void resetEncoders() {
+    this.steerMotor.getSensorCollection().setAnalogPosition(0, 1000);
+    this.steerMotor.setStatusFramePeriod(4, 1);
+  }
+
   public double getDriveEncoder() {
-    driveEncoder.setDouble(this.m_driveEncoder.getPosition());
-    return this.m_driveEncoder.getPosition();
+    driveEncoderUI.setDouble(this.driveEncoder.getPosition());
+    return this.driveEncoder.getPosition();
   }
 
   public double getSteerEncoder() {
-    steerEncoder.setDouble(Math.abs(m_steerMotor.getSensorCollection().getAnalogIn()));
-    //System.out.println("SteerEncoder for " + this.name + " has pos " + m_steerMotor.getSelectedSensorPosition());
-    return Math.abs(m_steerMotor.getSensorCollection().getAnalogIn());
-  }
-
-  public void resetEncoders() {
-    this.m_steerMotor.getSensorCollection().setAnalogPosition(0, 1000);
-    this.m_steerMotor.setStatusFramePeriod(4, 1);
+    steerEncoderUI.setDouble(Math.abs(steerMotor.getSensorCollection().getAnalogIn()));
+    return Math.abs(steerMotor.getSensorCollection().getAnalogIn());
   }
   
   public void setDriveSpeed(double driveSpeed) {
     driveVoltage.setDouble(driveSpeed);
-    m_driveMotor.setVoltage(driveSpeed);
+    driveMotor.setVoltage(driveSpeed);
   }
 
   public void setSteerSpeed(double steerSpeed) {
     steerVoltage.setDouble(steerSpeed);
-    m_steerMotor.setVoltage(steerSpeed);
+    steerMotor.setVoltage(steerSpeed);
   }
 
   public boolean orientTo(int degree, double speed, boolean allowSignal) {
@@ -81,14 +80,14 @@ public class SwerveModule {
 
     System.out.println("Scale " + scale + "Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
 
-    if( Math.abs(offset) > Constants.DEGREE_TOLERANCE && allowSignal){
-      // if(offset > 0) {
-      //   setSteerSpeed(-1 * speed);
-      //   return true;
-      // } else {
+    if( Math.abs(offset) > Constants.Swerve.DEGREE_TOLERANCE && allowSignal){
+      if(offset > 0) {
+        setSteerSpeed(-1 * speed);
+        return true;
+      } else {
         setSteerSpeed(speed);
         return true;
-      //}
+      }
     } else {
       setSteerSpeed(0);
       return false;

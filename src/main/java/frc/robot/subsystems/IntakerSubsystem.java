@@ -5,10 +5,7 @@
 package frc.robot.subsystems;
 
 import java.util.Map;
-
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -16,30 +13,51 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Shuffle;
 
 public class IntakerSubsystem extends SubsystemBase {
 
   private ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+  
   public NetworkTableEntry intakeSpeed = tab.add("Intake Speed", 1.0)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
-  private WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_ID);
-  private XboxController assistantDriver = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
+  private WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_ID);
+  private XboxController assistantDriver = new XboxController(Constants.Xbox.XBOX_ASSISTANT_CONTROLLER_ID);
 
   /** Creates a new IntakerSubsystem. */
   public IntakerSubsystem() {
   }
 
   public void intake() {
-    // This method will be called once per scheduler run
+
     if (assistantDriver.getAButtonPressed()) {
-      intakeTalon.set(intakeSpeed.getDouble(Constants.INTAKE_SPEED) * Constants.INTAKE_POLARITY_MOD);
+
+      counterClockSpin();
+
+    } else if (assistantDriver.getAButtonReleased()) {
+      
+      stop();
+    
     }
-    if (assistantDriver.getAButtonReleased()) {
-      intakeTalon.set(Constants.NO_SPEED);
-    }
+  }
+
+  public void counterClockSpin() {
+
+    intakeTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD);
+
+  }
+
+  public void clockSpin() {
+
+    intakeTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD * -1);
+
+  }
+
+  public void stop() {
+
+    intakeTalon.set(Constants.NO_SPEED);
+
   }
 
   @Override

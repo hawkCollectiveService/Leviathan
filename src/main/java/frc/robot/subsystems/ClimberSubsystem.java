@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -19,8 +12,8 @@ public class ClimberSubsystem extends SubsystemBase {
   /**
    * TalonFX Controllers - for Climber (Winch)
    */
-  private WPI_TalonFX leftWinchTalonFX = new WPI_TalonFX(Constants.LEFT_WINCH_TALON_FX_ID);
-  private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.RIGHT_WINCH_TALON_FX_ID);
+  private WPI_TalonFX leftWinchTalonFX = new WPI_TalonFX(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
+  private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   private boolean hasLifted = false;
 
   /**
@@ -29,13 +22,13 @@ public class ClimberSubsystem extends SubsystemBase {
    * XButton for shoot Low
    * YButton for shoot High
    */
-  private XboxController assistantDriverController = new XboxController(Constants.XBOX_ASSISTANT_DRIVER_CONTROLLER_ID);
+  private XboxController assistantDriverController = new XboxController(Constants.Xbox.XBOX_ASSISTANT_CONTROLLER_ID);
 
   /**
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
-  //  stopClimber(); // default state.
+    stopClimber(); // default state.
   }
 
   /**
@@ -60,13 +53,13 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   private void extend() {
-    leftWinchTalonFX.set(Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set(Constants.RIGHT_CLIMB_SPEED * Constants.RIGHT_CLIMBER_POLARITY_MOD);
+    leftWinchTalonFX.set(Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set(Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void contract() {
-    leftWinchTalonFX.set((-1) * Constants.LEFT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set((-1) * Constants.RIGHT_CLIMB_SPEED * Constants.LEFT_CLIMBER_POLARITY_MOD);
+    leftWinchTalonFX.set((-1) * Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set((-1) * Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD);
   }
 
   private void stopClimber() {
