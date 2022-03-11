@@ -8,125 +8,89 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-// import edu.wpi.first.wpilibj.Encoder;
-// import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-// import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import frc.robot.Constants;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
+@SuppressWarnings("unused")
 public class SwerveModule {
 
-  private static final double kWheelRadius = Constants.RADIUS_OF_WHEEL;
-  private static final int kEncoderResolution = Constants.STEER_ENCODER_RESOLUTION;
+  private static final double kWheelRadius = Constants.Swerve.RADIUS_OF_WHEEL;
 
-  private static final double kModuleMaxAngularVelocity = DriveTrainSubsystem.kMaxAngularSpeed;
-  private static final double kModuleMaxAngularAcceleration = 2 * Math.PI; // radians per second squared
+  private final CANSparkMax driveMotor;
+  private final WPI_TalonSRX steerMotor;
+  private final RelativeEncoder driveEncoder;
+  private final WPI_CANCoder steerEncoder;
 
-  private final CANSparkMax m_driveMotor;
-  private final WPI_TalonSRX m_steerMotor;
+  private NetworkTableEntry driveEncoderUI;
+  private NetworkTableEntry steerEncoderUI;
+  private NetworkTableEntry driveVoltage;
+  private NetworkTableEntry steerVoltage;
 
-  private final RelativeEncoder m_driveEncoder;
-  private final WPI_CANCoder m_steerEncoder;
+  private String name;
 
-  private double driveDistancePerPulse;
-  private double steerDistancePerPulse;
+  public SwerveModule(int driveMotorID, int steerMotorID, String name) {
+    this.name = name;
 
-  // Gains are for example purposes only - must be determined for your own robot!
-  private final PIDController m_drivePIDController = new PIDController(
-      Constants.DRIVE_PID_PROPORTIONAL_GAIN,
-      Constants.DRIVE_PID_INTEGRAL_GAIN,
-      Constants.DRIVE_PID_DERIVATIVE_GAIN);
+    ShuffleboardTab tab = Shuffleboard.getTab(name + " Swerve Module");
+    driveEncoderUI = tab.add("driveEncoderValue", 0).getEntry();
+    steerEncoderUI = tab.add("steerEncoderValue", 0).getEntry();
+    driveVoltage = tab.add("driveMotorVoltage", 0).getEntry();
+    steerVoltage = tab.add("steerMotorVoltage", 0).getEntry();
 
-  // Gains are for example purposes only - must be determined for your own robot!
-  private final ProfiledPIDController m_turningPIDController = new ProfiledPIDController(
-    Constants.STEER_PID_PROPORTIONAL_GAIN,
-    Constants.STEER_PID_INTEGRAL_GAIN,
-    Constants.STEER_PID_DERIVATIVE_GAIN,
-      new TrapezoidProfile.Constraints(
-          kModuleMaxAngularVelocity, kModuleMaxAngularAcceleration));
+    driveMotor = new CANSparkMax(driveMotorID, Constants.Chassis.BRUSHLESS_MOTOR);
+    steerMotor = new WPI_TalonSRX(steerMotorID);
 
-  // Gains (StaticGain, VelocityGain) are for example purposes only - must be determined for your own robot!
-  private final SimpleMotorFeedforward m_driveFeedforward = new SimpleMotorFeedforward(1, 3);    // TODO: Adjust drive feedForward gains per testing.
-  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);   // TODO: Adjust steer feedForward gains per testing.
-
-  /**
-   * Constructs a SwerveModule with a drive motor, turning motor, drive encoder
-   * and turning encoder.
-   *
-   * @param driveMotorID CAN ID for the drive motor.
-   * @param steerMotorID CAN ID for the steering motor.
-   */
-  public SwerveModule(int driveMotorID, int steerMotorID) {
-    m_driveMotor = new CANSparkMax(driveMotorID, Constants.BRUSHLESS_MOTOR);
-    m_steerMotor = new WPI_TalonSRX(steerMotorID);
-
-    m_driveEncoder = m_driveMotor.getEncoder();
-    m_steerEncoder = new WPI_CANCoder(steerMotorID);
-
-    // Set the distance per pulse for the drive encoder. We can simply use the
-    // distance traveled for one rotation of the wheel divided by the encoder
-    // resolution.
-    // Note: The drive encoder uses 1024 ticks per revolution and is accessed by
-    // getPosition()
-    // whereas the Lamprey encoder getPosition() return current degree of the
-    // encoder.
-    // m_driveEncoder.setDistancePerPulse(2 * Math.PI * kWheelRadius /
-    // kEncoderResolution);
-    driveDistancePerPulse = 2 * Math.PI * kWheelRadius / Constants.DRIVE_ENCODER_RESOLUTION;
-
-    // Set the distance (in this case, angle) per pulse for the turning encoder.
-    // This is the the angle through an entire rotation (2 * pi) divided by the
-    // encoder resolution.
-    // m_turningEncoder.setDistancePerPulse(2 * Math.PI / kEncoderResolution);
-    steerDistancePerPulse = 2 * Math.PI / Constants.STEER_ENCODER_RESOLUTION;
-
-    // Limit the PID Controller's input range between -pi and pi and set the input
-    // to be continuous.
-    m_turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
+    driveEncoder = driveMotor.getEncoder();
+    steerEncoder = new WPI_CANCoder(steerMotorID);
+    resetEncoders();
   }
 
-  /**
-   * Returns the current state of the module.
-   *
-   * @return The current state of the module.
-   */
-  public SwerveModuleState getState() {
-    // return new SwerveModuleState(m_driveEncoder.getRate(), new
-    // Rotation2d(m_steerEncoder.get()));
-    return new SwerveModuleState(m_driveEncoder.getVelocity() * driveDistancePerPulse,
-        new Rotation2d(m_steerEncoder.getPosition()));
+  public void resetEncoders() {
+    this.steerMotor.getSensorCollection().setAnalogPosition(0, 1000);
+    this.steerMotor.setStatusFramePeriod(4, 1);
   }
 
-  /**
-   * Sets the desired state for the module.
-   *
-   * @param desiredState Desired state with speed and angle.
-   */
-  public void setDesiredState(SwerveModuleState desiredState) {
-    // Optimize the reference state to avoid spinning further than 90 degrees
-    SwerveModuleState state = SwerveModuleState.optimize(desiredState, new Rotation2d(m_steerEncoder.getPosition()));
+  public double getDriveEncoder() {
+    driveEncoderUI.setDouble(this.driveEncoder.getPosition());
+    return this.driveEncoder.getPosition();
+  }
 
-    // Calculate the drive output from the drive PID controller.
-    // final double driveOutput =
-    // m_drivePIDController.calculate(m_driveEncoder.getRate(),
-    // state.speedMetersPerSecond);
-    final double driveOutput = m_drivePIDController.calculate(m_driveEncoder.getVelocity() * driveDistancePerPulse,
-        state.speedMetersPerSecond);
+  public double getSteerEncoder() {
+    steerEncoderUI.setDouble(Math.abs(steerMotor.getSensorCollection().getAnalogIn()));
+    return Math.abs(steerMotor.getSensorCollection().getAnalogIn());
+  }
+  
+  public void setDriveSpeed(double driveSpeed) {
+    driveVoltage.setDouble(driveSpeed);
+    driveMotor.setVoltage(driveSpeed);
+  }
 
-    final double driveFeedforward = m_driveFeedforward.calculate(state.speedMetersPerSecond);
+  public void setSteerSpeed(double steerSpeed) {
+    steerVoltage.setDouble(steerSpeed);
+    steerMotor.setVoltage(steerSpeed);
+  }
 
-    // Calculate the turning motor output from the turning PID controller.
-    final double turnOutput = m_turningPIDController.calculate(m_steerEncoder.getPosition(), state.angle.getRadians());
+  public boolean orientTo(int degree, double speed, boolean allowSignal) {
+    int scale = (int)getSteerEncoder() / 360;
+    int desired = 360 * scale + degree;
 
-    final double turnFeedforward = m_turnFeedforward.calculate(m_turningPIDController.getSetpoint().velocity);
+    double offset = getSteerEncoder() - desired;
 
-    m_driveMotor.setVoltage(driveOutput + driveFeedforward);
-    m_steerMotor.setVoltage(turnOutput + turnFeedforward);
+    System.out.println("Scale " + scale + "Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
+
+    if( Math.abs(offset) > Constants.Swerve.DEGREE_TOLERANCE && allowSignal){
+      if(offset > 0) {
+        setSteerSpeed(-1 * speed);
+        return true;
+      } else {
+        setSteerSpeed(speed);
+        return true;
+      }
+    } else {
+      setSteerSpeed(0);
+      return false;
+    }
   }
 }
