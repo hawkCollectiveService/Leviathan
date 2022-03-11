@@ -17,8 +17,6 @@ public class ClimberCommand extends CommandBase {
    * Creates a new ClimberCommand.
    */
   public ClimberCommand(ClimberSubsystem subsystem) {
-
-    // Use addRequirements() here to declare subsystem dependencies.
     climberSubsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -33,7 +31,6 @@ public class ClimberCommand extends CommandBase {
   // Calls which drive mode we're going to use during competitions
   @Override
   public void execute() {
-    //System.out.println("DEVCHECK ShooterCommand.execute"); // floods the RioLog. be careful
     climberSubsystem.climb();
   }
 
