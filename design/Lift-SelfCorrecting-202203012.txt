@@ -1,0 +1,24 @@
+2022-03-12 (Sat)
+
+Lift Self-Correcting logic to prevent the Lift arms from slowly creeping upward during the match.
+In ClimberSubsystem constructor
+	Reset Climber encoders on Falcon motors. (talonFX.encoder.reset)
+	Initialize self-Correction variables (init values)
+		minEncoder = 0 
+		maxValue = 14900
+		safetyOffset = 3506
+		midValue = (maxEncoder + minEncoder)/2  (value=7450)
+		selfCorrection = true // self-correction flag
+In Robot.teleOpInit
+	Go back to init Values
+While Robot is running (teleOp mode)
+	In Climber subsystem
+	If (selfCorrection==true)
+	Check encoder value talonFX.getSensorCollection.getIntegratedSensorAbsolutePosition
+	When encoderValue is > (maxValue - safetyOffset)
+		Lower Arm to midValue
+	If climberButtonPressed Then disable SelfCorrection
+		selfCorrection = false
+
+Disable SelfCorrection (override) by pressing Start button  (to start using the Lift manually)
+Re-Enable SelfCorrection by pressing Back button  (re-enable SelfCorrection, stop using the Lift manually)
