@@ -16,7 +16,7 @@ import edu.wpi.first.cscore.UsbCamera;
  */
 public class Robot extends TimedRobot {
   
-  private static RobotContainer m_robotContainer;
+  private static RobotContainer m_robotContainer = new RobotContainer();
   private Command m_autonomousCommand;
 
   public static SendableChooser<String> startingPositionChooser = new SendableChooser<>();
@@ -33,7 +33,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();
 
     // This will perform all our button bindings, and put our autonomous chooser & cameras on the dashboard.
-    m_robotContainer = new RobotContainer();
     System.out.println("DEVCHECK robotInit");
     
     startingPositionChooser.addOption("Move Off Line", "Move");

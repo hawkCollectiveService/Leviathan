@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.AutonomousSubsystem;
 
 public class AutonomousCommand extends CommandBase {
-  private AutonomousSubsystem m_autonomousSubsystem = new AutonomousSubsystem();
+  private AutonomousSubsystem autonomousSubsystem;
   
   /**
    * Creates a new AutonomousCommand.
    */
   public AutonomousCommand(AutonomousSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_autonomousSubsystem = subsystem;
+    autonomousSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -30,7 +30,7 @@ public class AutonomousCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_autonomousSubsystem.autonomous();
+    autonomousSubsystem.autonomous();
   }
 
   // Called once the command ends or is interrupted.

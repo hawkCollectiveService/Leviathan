@@ -32,6 +32,7 @@ public class ClimberCommand extends CommandBase {
   @Override
   public void execute() {
     climberSubsystem.climb();
+    climberSubsystem.readEncoder();
   }
 
   // Called once the command ends or is interrupted.

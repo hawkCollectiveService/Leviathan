@@ -43,13 +43,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // If the A button is pressed, the shoot Low process will begin.
     if (assistantController.getAButtonPressed()) {
-      startFeeder();
       shootLow();
     }
 
     // If the Y button is pressed, the shoot High process will begin.
     if (assistantController.getYButtonPressed()) {
-      startFeeder();
       shootHigh();
     }
 
@@ -66,11 +64,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootHigh() {
+    startFeeder();
     shooterFrontTalonSRX.set(Constants.Shooter.SHOOTER_BOTTOM_POLARITY_MOD * highShooterSpeed.getDouble(Constants.Shooter.SHOOTER_HIGH_SPEED));
     shooterBackTalonSRX.set(Constants.Shooter.SHOOTER_TOP_POLARITY_MOD * highShooterSpeed.getDouble(Constants.Shooter.SHOOTER_LOW_SPEED));
   }
 
   public void shootLow() {
+    startFeeder();
     shooterFrontTalonSRX.set(Constants.Shooter.SHOOTER_BOTTOM_POLARITY_MOD * lowShooterSpeed.getDouble(Constants.Shooter.SHOOTER_LOW_SPEED));
     shooterBackTalonSRX.set(Constants.Shooter.SHOOTER_TOP_POLARITY_MOD * lowShooterSpeed.getDouble(Constants.Shooter.SHOOTER_LOW_SPEED));
   }

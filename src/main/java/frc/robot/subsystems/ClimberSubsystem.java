@@ -1,8 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.WPI_CANCoder;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -14,7 +19,17 @@ public class ClimberSubsystem extends SubsystemBase {
    */
   private WPI_TalonFX leftWinchTalonFX = new WPI_TalonFX(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
+  // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
   private boolean hasLifted = false;
+
+  private double max = 14900;
+  private double mid = 7450;
+  private double min = 0.0;
+  private double step = 3506;
+  private boolean needsCorrection = false;
+  private boolean enableCorrection = true;
+
+  private NetworkTableEntry leftEncoderPosition;
 
   /**
    * Xbox controller object used in the case the driver drives with an Xbox
@@ -28,6 +43,9 @@ public class ClimberSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
+    ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+    leftEncoderPosition = tab.add("Left Arm Encoder", 0).getEntry();
+    this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
     stopClimber(); // default state.
   }
 
@@ -37,19 +55,47 @@ public class ClimberSubsystem extends SubsystemBase {
    * process will start.
    */
   public void climb() {
+    readEncoder();
 
-    // If the LeftBumper and RightBumper are pressed,
-    // the Climb Left process will begin.
-    if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed()){
+    if (readEncoder() >= (max - step) && enableCorrection && !needsCorrection) {
+
+      needsCorrection = true;
+
+    } else if (needsCorrection) {
+
+      contract();
+
+      if (readEncoder() <= (max - step - step)){
+        needsCorrection = false;
+        stopClimber();
+      }
+
+    } else if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed()){
+      
       extend();
       hasLifted = true;
-    }
-    else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed() && hasLifted)
+
+    } else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed() && hasLifted){
+
       contract();
-    else if (assistantDriverController.getLeftBumperReleased())
+
+    } else if (assistantDriverController.getLeftBumperReleased()){
+
       stopClimber();
-    else if (assistantDriverController.getRightBumperReleased())
+
+    } else if (assistantDriverController.getRightBumperReleased()){
+
       stopClimber();
+
+    } else if (assistantDriverController.getStartButtonPressed()){
+
+      disableCorrections();
+
+    } else if (assistantDriverController.getBackButtonPressed()){
+
+      enableCorrections();
+
+    } 
   }
 
   private void extend() {
@@ -67,4 +113,22 @@ public class ClimberSubsystem extends SubsystemBase {
     rightWinchTalonFX.set(Constants.NO_SPEED);
   }
 
+  public double readEncoder() {
+    this.leftEncoderPosition.setDouble(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+
+    if (Constants.DEBUG){
+      System.out.println("Encoder Position: " + this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+    }
+
+    return this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  private void disableCorrections() {
+    enableCorrection = false;
+    needsCorrection = false;
+  }
+
+  private void enableCorrections() {
+    enableCorrection = true;
+  }
 }
