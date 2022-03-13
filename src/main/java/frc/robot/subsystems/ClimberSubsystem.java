@@ -140,9 +140,9 @@ public class ClimberSubsystem extends SubsystemBase {
   public double readEncoder() {
     this.leftEncoderPosition.setDouble(Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
 
-    if (Constants.DEBUG){
-      System.out.println("Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
-    }
+    // if (Constants.DEBUG){
+    //   System.out.println("Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+    // }
 
     return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
   }

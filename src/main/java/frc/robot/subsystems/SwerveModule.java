@@ -39,6 +39,10 @@ public class SwerveModule {
     driveVoltage = tab.add(name + " driveMotorVoltage", 0).getEntry();
     steerVoltage = tab.add(name + " steerMotorVoltage", 0).getEntry();
 
+    //steerMotor.getSelectedSensorPosition()
+    //steerMotor.setSelectedSensorPosition(sensorPos)
+
+
     driveMotor = new CANSparkMax(driveMotorID, Constants.Chassis.BRUSHLESS_MOTOR);
     steerMotor = new WPI_TalonSRX(steerMotorID);
 
@@ -73,12 +77,12 @@ public class SwerveModule {
   }
 
   public boolean orientTo(int degree, double speed, boolean allowSignal) {
-    int scale = (int)getSteerEncoder() / 360;
+    int scale = (int) getSteerEncoder() / 360;
     int desired = 360 * scale + degree;
 
     double offset = getSteerEncoder() - desired;
 
-    System.out.println("Scale " + scale + "Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
+    System.out.println("Scale " + scale + " Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
 
     if( Math.abs(offset) > Constants.Swerve.DEGREE_TOLERANCE && allowSignal){
       if(offset > 0) {

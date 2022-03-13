@@ -142,9 +142,9 @@ public final class Constants {
         /**
          * Speed modifier variables for the steer motors
          */
-        public static final double LEFT_FRONT_STEER_SPEED_MOD = 0;
+        public static final double LEFT_FRONT_STEER_SPEED_MOD = 4;
         public static final double RIGHT_FRONT_STEER_SPEED_MOD = 0;
-        public static final double LEFT_BACK_STEER_SPEED_MOD = 0;
+        public static final double LEFT_BACK_STEER_SPEED_MOD = 4;
         public static final double RIGHT_BACK_STEER_SPEED_MOD = 0;
 
         /**
