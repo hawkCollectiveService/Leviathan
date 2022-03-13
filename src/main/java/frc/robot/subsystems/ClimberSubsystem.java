@@ -1,11 +1,15 @@
 package frc.robot.subsystems;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,11 +24,24 @@ public class ClimberSubsystem extends SubsystemBase {
   private WPI_TalonFX leftWinchTalonFX = new WPI_TalonFX(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
+
+  private Servo leftLatch = new Servo(0); // PWM Port number
+  // private Servo rightLatch = new Servo(1); // PWM Port number
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
   private boolean enableCorrection = true;
 
+  private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
+
   private NetworkTableEntry leftEncoderPosition;
+
+  public NetworkTableEntry latchLockPosition = tab.add("Latch Lock Position", Constants.Climber.LATCH_LOCKED_POS)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
+
+  public NetworkTableEntry latchUnlockedPosition = tab.add("Latch Unlock Position", Constants.Climber.LATCH_UNLOCKED_POS)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
   /**
    * Xbox controller object used in the case the driver drives with an Xbox
@@ -38,10 +55,12 @@ public class ClimberSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
-    ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
+
     leftEncoderPosition = tab.add("Left Arm Encoder", 0).getEntry();
+
     this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
-    stopClimber(); // default state.
+
+    stopClimber();
   }
 
   /**
@@ -90,7 +109,17 @@ public class ClimberSubsystem extends SubsystemBase {
 
       enableCorrections();
 
-    } 
+    } else if (assistantDriverController.getRightStickButtonPressed()){
+      
+      leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      //rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+
+    } else if (assistantDriverController.getLeftStickButtonPressed()){
+
+      leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      //rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+
+    }
   }
 
   private void extend() {

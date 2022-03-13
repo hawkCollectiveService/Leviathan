@@ -52,6 +52,9 @@ public final class Constants {
         public static final double CLIMBER_ENCODER_MIN_VAL = 0.0;
         public static final double CLIMBER_ENCODER_STEP = 3506;
 
+        public static final double LATCH_LOCKED_POS = 0.0;
+        public static final double LATCH_UNLOCKED_POS = 1.0;
+
     }
 
     public static class Shooter {
