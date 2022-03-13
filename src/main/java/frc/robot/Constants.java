@@ -45,7 +45,12 @@ public final class Constants {
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = -1;
-        public static final int LEFT_CLIMBER_POLARITY_MOD = 1;
+        public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
+
+        public static final double CLIMBER_ENCODER_MAX_VAL = 14900;
+        public static final double CLIMBER_ENCODER_MID_VAL = 7450;
+        public static final double CLIMBER_ENCODER_MIN_VAL = 0.0;
+        public static final double CLIMBER_ENCODER_STEP = 3506;
 
     }
 
@@ -189,8 +194,10 @@ public final class Constants {
 
     public static class Autonomous {
 
-        //This does something I guess..
-        public static boolean isTargeting = false;
+        public static double AUTO_DRIVE_SPEED = -0.5;
+        public static double AUTO_DRIVE_TIME_DELAY = 1.5;
+        public static double AUTO_SHOOT_TIME_DELAY = 2.0;
+        public static double AUTO_ENCODER_TRAVEL_DISTANCE = 0.0;
 
     }
 }

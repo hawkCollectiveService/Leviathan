@@ -21,11 +21,6 @@ public class ClimberSubsystem extends SubsystemBase {
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
   private boolean hasLifted = false;
-
-  private double max = 14900;
-  private double mid = 7450;
-  private double min = 0.0;
-  private double step = 3506;
   private boolean needsCorrection = false;
   private boolean enableCorrection = true;
 
@@ -43,7 +38,7 @@ public class ClimberSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
-    ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+    ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
     leftEncoderPosition = tab.add("Left Arm Encoder", 0).getEntry();
     this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
     stopClimber(); // default state.
@@ -57,7 +52,7 @@ public class ClimberSubsystem extends SubsystemBase {
   public void climb() {
     readEncoder();
 
-    if (readEncoder() >= (max - step) && enableCorrection && !needsCorrection) {
+    if (readEncoder() >= (Constants.Climber.CLIMBER_ENCODER_MAX_VAL - Constants.Climber.CLIMBER_ENCODER_STEP) && enableCorrection && !needsCorrection) {
 
       needsCorrection = true;
 
@@ -65,7 +60,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
       contract();
 
-      if (readEncoder() <= (max - step - step)){
+      if (readEncoder() <= (Constants.Climber.CLIMBER_ENCODER_MAX_VAL - (Constants.Climber.CLIMBER_ENCODER_STEP * 2))){
         needsCorrection = false;
         stopClimber();
       }
@@ -114,13 +109,13 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public double readEncoder() {
-    this.leftEncoderPosition.setDouble(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+    this.leftEncoderPosition.setDouble(Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
 
     if (Constants.DEBUG){
-      System.out.println("Encoder Position: " + this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+      System.out.println("Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    return this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition();
+    return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
   }
 
   private void disableCorrections() {

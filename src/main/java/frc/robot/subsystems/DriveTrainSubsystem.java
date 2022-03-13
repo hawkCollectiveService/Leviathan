@@ -33,9 +33,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem() {
     m_gyro.reset();
-    ShuffleboardTab tab = Shuffleboard.getTab("DriveTrain");
-    driveLeftY = tab.add("Drive Controller Left Stick Y", 0).getEntry();
-    driveRightY = tab.add("Drive Controller Right Stick Y", 0).getEntry();
+    ShuffleboardTab tab = Shuffleboard.getTab("Main");
+    driveLeftY = tab.add("Drive Left Stick Y", 0).getEntry();
+    driveRightY = tab.add("Drive Right Stick Y", 0).getEntry();
   }
 
   public void drive(double leftSpeed, double rightSpeed) {

@@ -16,9 +16,9 @@ import frc.robot.Constants;
 
 public class IntakerSubsystem extends SubsystemBase {
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+  private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
   
-  public NetworkTableEntry intakeSpeed = tab.add("Intake Speed", 1.0)
+  public NetworkTableEntry intakeSpeed = tab.add("Intake Speed", Constants.Intake.INTAKE_SPEED)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 

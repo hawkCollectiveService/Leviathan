@@ -5,6 +5,8 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.revrobotics.CANSparkMax;
@@ -15,21 +17,40 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 @SuppressWarnings("unused")
 public class AutonomousSubsystem extends SubsystemBase {
 
   private boolean firstRun = true;
   RobotContainer robotContainer = Robot.getRobotContainer();
-  ShooterSubsystem shooter;
+  ShooterSubsystem shoot;
   DriveTrainSubsystem drive;
+  ClimberSubsystem climb;
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("Autonomous");
+
+  public NetworkTableEntry autoDriveSpeed = tab.add("AUTO DRIVE SPEED", Constants.Autonomous.AUTO_DRIVE_SPEED)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", -1, "max", 0)).getEntry();
+
+  public NetworkTableEntry autoDriveDelay = tab.add("AUTO DRIVE DELAY", Constants.Autonomous.AUTO_DRIVE_TIME_DELAY)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 5)).getEntry();
+
+  public NetworkTableEntry autoShooterDelay = tab.add("AUTO SHOOTER DELAY", Constants.Autonomous.AUTO_SHOOT_TIME_DELAY)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 5)).getEntry();
 
   /**
    * Creates a new AutonomousSubsystem.
    */
-  public AutonomousSubsystem(ShooterSubsystem shooter, DriveTrainSubsystem drive) {
-    this.shooter = shooter;
+  public AutonomousSubsystem(ShooterSubsystem shooter, DriveTrainSubsystem drive, ClimberSubsystem climb) {
+    this.shoot = shooter;
     this.drive = drive;
+    this.climb = climb;
   }
 
   /**
@@ -38,22 +59,23 @@ public class AutonomousSubsystem extends SubsystemBase {
   public void autonomous() {
     // Gather selection from Shuffleboard that was declared in Robot
     // String choice = Robot.startingPositionChooser.getSelected();
+    climb.climb();
 
     if(firstRun){
 
-      drive.drive(-0.50, -0.50);   //Start driving backwards
+      drive.drive(autoDriveSpeed.getDouble(Constants.Autonomous.AUTO_DRIVE_SPEED), autoDriveSpeed.getDouble(Constants.Autonomous.AUTO_DRIVE_SPEED));   //Start driving backwards
 
-      Timer.delay(1.5);                                        //Give the robot time to drive backwards
+      Timer.delay(autoDriveDelay.getDouble(Constants.Autonomous.AUTO_DRIVE_TIME_DELAY));                                        //Give the robot time to drive backwards
       
       drive.drive(0, 0);     //Stop driving
-      shooter.shootHigh();        //Start shooting
+      shoot.shootHigh();        //Start shooting
       
-      Timer.delay(2);                                          //Give the robot time to shoot
+      Timer.delay(autoShooterDelay.getDouble(Constants.Autonomous.AUTO_SHOOT_TIME_DELAY));                                          //Give the robot time to shoot
       
-      shooter.shootStop();        //Stop shooting
-      drive.drive(-0.5, -0.5);   //Drive backwards some more
+      shoot.shootStop();        //Stop shooting
+      drive.drive(autoDriveSpeed.getDouble(Constants.Autonomous.AUTO_DRIVE_SPEED), autoDriveSpeed.getDouble(Constants.Autonomous.AUTO_DRIVE_SPEED));   //Start driving backwards
       
-      Timer.delay(1.5);                                          //Some time to drive backwards
+      Timer.delay(autoDriveDelay.getDouble(Constants.Autonomous.AUTO_DRIVE_TIME_DELAY));                                        //Give the robot time to drive backwards
       
       drive.drive(0, 0);     //Stop driving
       

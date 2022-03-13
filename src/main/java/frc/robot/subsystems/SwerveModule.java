@@ -21,7 +21,7 @@ public class SwerveModule {
   private final CANSparkMax driveMotor;
   private final WPI_TalonSRX steerMotor;
   private final RelativeEncoder driveEncoder;
-  private final WPI_CANCoder steerEncoder;
+  //private final WPI_CANCoder steerEncoder;
 
   private NetworkTableEntry driveEncoderUI;
   private NetworkTableEntry steerEncoderUI;
@@ -33,17 +33,17 @@ public class SwerveModule {
   public SwerveModule(int driveMotorID, int steerMotorID, String name) {
     this.name = name;
 
-    ShuffleboardTab tab = Shuffleboard.getTab(name + " Swerve Module");
-    driveEncoderUI = tab.add("driveEncoderValue", 0).getEntry();
-    steerEncoderUI = tab.add("steerEncoderValue", 0).getEntry();
-    driveVoltage = tab.add("driveMotorVoltage", 0).getEntry();
-    steerVoltage = tab.add("steerMotorVoltage", 0).getEntry();
+    ShuffleboardTab tab = Shuffleboard.getTab("DriveTrain");
+    driveEncoderUI = tab.add(name + " driveEncoderValue", 0).getEntry();
+    steerEncoderUI = tab.add(name + " steerEncoderValue", 0).getEntry();
+    driveVoltage = tab.add(name + " driveMotorVoltage", 0).getEntry();
+    steerVoltage = tab.add(name + " steerMotorVoltage", 0).getEntry();
 
     driveMotor = new CANSparkMax(driveMotorID, Constants.Chassis.BRUSHLESS_MOTOR);
     steerMotor = new WPI_TalonSRX(steerMotorID);
 
     driveEncoder = driveMotor.getEncoder();
-    steerEncoder = new WPI_CANCoder(steerMotorID);
+    //steerEncoder = new WPI_CANCoder(steerMotorID);
     resetEncoders();
   }
 

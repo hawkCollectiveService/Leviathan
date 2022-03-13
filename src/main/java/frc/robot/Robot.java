@@ -39,6 +39,9 @@ public class Robot extends TimedRobot {
     startingPositionChooser.addOption("Shoot", "Shoot");
     startingPositionChooser.addOption("Test", "Test");
 
+    //intakeCamera.setResolution(240, 240);
+    //liftCamera.setResolution(240, 240);
+
     Shuffleboard.getTab("Main").add("Lift Camera", liftCamera);
     Shuffleboard.getTab("Main").add("Intak Camera", intakeCamera);
 

@@ -12,17 +12,17 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("Constants");
+  private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
 
-  public NetworkTableEntry lowShooterSpeed = tab.add("Low Shooter Speed", 1.0)
+  public NetworkTableEntry lowShooterSpeed = tab.add("Low Shooter Speed", Constants.Shooter.SHOOTER_LOW_SPEED)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
-  public NetworkTableEntry highShooterSpeed = tab.add("High Shooter Speed", 1.0)
+  public NetworkTableEntry highShooterSpeed = tab.add("High Shooter Speed", Constants.Shooter.SHOOTER_HIGH_SPEED)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
-  public NetworkTableEntry feederSpeed = tab.add("Feeder Speed", 1.0)
+  public NetworkTableEntry feederSpeed = tab.add("Feeder Speed", Constants.Feeder.FEEDER_SPEED)
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 

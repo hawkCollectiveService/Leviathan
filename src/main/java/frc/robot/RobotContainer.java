@@ -47,7 +47,7 @@ public class RobotContainer {
   private final ClimberCommand climberCommand = new ClimberCommand(climberSubsystem);
 
   // Connects AutonomousSubsystem and AutonomousCommand together
-  private final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem(shooterSubsystem, driveTrainSubsystem);
+  private final AutonomousSubsystem autonomousSubsystem = new AutonomousSubsystem(shooterSubsystem, driveTrainSubsystem, climberSubsystem);
   private final AutonomousCommand autonomousCommand = new AutonomousCommand(autonomousSubsystem);
 
   /**
@@ -95,5 +95,9 @@ public class RobotContainer {
 
   public ShooterSubsystem getShooterSubsystem() {
     return this.shooterSubsystem;
+  }
+
+  public ClimberSubsystem getClimberSubsystem() {
+    return this.climberSubsystem;
   }
 }
