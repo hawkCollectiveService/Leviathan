@@ -43,7 +43,6 @@ public class SwerveModule {
     steerMotor = new WPI_TalonSRX(steerMotorID);
 
     driveEncoder = driveMotor.getEncoder();
-    //steerEncoder = new WPI_CANCoder(steerMotorID);
     resetEncoders();
   }
 
@@ -70,27 +69,5 @@ public class SwerveModule {
   public void setSteerSpeed(double steerSpeed) {
     steerVoltage.setDouble(steerSpeed);
     steerMotor.setVoltage(steerSpeed);
-  }
-
-  public boolean orientTo(int degree, double speed, boolean allowSignal) {
-    int scale = (int)getSteerEncoder() / 360;
-    int desired = 360 * scale + degree;
-
-    double offset = getSteerEncoder() - desired;
-
-    System.out.println("Scale " + scale + "Encoder: " + getSteerEncoder() + " Desired: " + desired + " Offset: " + offset);
-
-    if( Math.abs(offset) > Constants.Swerve.DEGREE_TOLERANCE && allowSignal){
-      if(offset > 0) {
-        setSteerSpeed(-1 * speed);
-        return true;
-      } else {
-        setSteerSpeed(speed);
-        return true;
-      }
-    } else {
-      setSteerSpeed(0);
-      return false;
-    }
   }
 }

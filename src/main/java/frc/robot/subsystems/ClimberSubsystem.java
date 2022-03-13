@@ -25,8 +25,9 @@ public class ClimberSubsystem extends SubsystemBase {
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
 
-  private Servo leftLatch = new Servo(0); // PWM Port number
+  // private Servo leftLatch = new Servo(0); // PWM Port number
   // private Servo rightLatch = new Servo(1); // PWM Port number
+
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
   private boolean enableCorrection = true;
@@ -55,6 +56,10 @@ public class ClimberSubsystem extends SubsystemBase {
    * Constructor forShooterSubsystem.
    */
   public ClimberSubsystem() {
+
+    /*
+    * The climber encoder sets its value to zero each time the code is dropped. Be cautious of arm location when dropping code. 
+    */
 
     leftEncoderPosition = tab.add("Left Arm Encoder", 0).getEntry();
 
@@ -111,12 +116,12 @@ public class ClimberSubsystem extends SubsystemBase {
 
     } else if (assistantDriverController.getRightStickButtonPressed()){
       
-      leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      //leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
       //rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
 
     } else if (assistantDriverController.getLeftStickButtonPressed()){
 
-      leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      //leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
       //rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
 
     }

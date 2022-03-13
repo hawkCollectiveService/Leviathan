@@ -44,7 +44,7 @@ public final class Constants {
         public static final double RIGHT_CLIMB_SPEED = 0.125;
 
         // Polarity modifier variables
-        public static final int RIGHT_CLIMBER_POLARITY_MOD = -1;
+        public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
         public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
 
         public static final double CLIMBER_ENCODER_MAX_VAL = 14900;
@@ -53,7 +53,7 @@ public final class Constants {
         public static final double CLIMBER_ENCODER_STEP = 3506;
 
         public static final double LATCH_LOCKED_POS = 0.0;
-        public static final double LATCH_UNLOCKED_POS = 1.0;
+        public static final double LATCH_UNLOCKED_POS = 0.66;  
 
     }
 
@@ -190,7 +190,7 @@ public final class Constants {
          */
         public static final int XBOX_ASSISTANT_CONTROLLER_ID = 2;
         public static final int XBOX_DRIVER_CONTROLLER_ID = 3;
-        public static final int XBOX_POLARITY_MOD = -1;
+        public static final int XBOX_JOYSTICK_POLARITY_MOD = -1;
         public static final double DEADZONE_MAGNITUDE = 0.2;
     
     }
@@ -200,7 +200,6 @@ public final class Constants {
         public static double AUTO_DRIVE_SPEED = -0.5;
         public static double AUTO_DRIVE_TIME_DELAY = 1.5;
         public static double AUTO_SHOOT_TIME_DELAY = 2.0;
-        public static double AUTO_ENCODER_TRAVEL_DISTANCE = 0.0;
 
     }
 }

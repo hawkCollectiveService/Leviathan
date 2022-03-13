@@ -49,8 +49,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void xboxSwerveDrive() {
     
-    double driveLeftY = generateDeadZones(driverController.getLeftY() * Constants.Xbox.XBOX_POLARITY_MOD);
-    double driveRightY = generateDeadZones(driverController.getRightY() * Constants.Xbox.XBOX_POLARITY_MOD);
+    double driveLeftY = generateDeadZones(driverController.getLeftY() * Constants.Xbox.XBOX_JOYSTICK_POLARITY_MOD);
+    double driveRightY = generateDeadZones(driverController.getRightY() * Constants.Xbox.XBOX_JOYSTICK_POLARITY_MOD);
     this.driveRightY.setDouble(driveRightY);
     this.driveLeftY.setDouble(driveLeftY);
 
