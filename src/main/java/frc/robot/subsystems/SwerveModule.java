@@ -21,7 +21,6 @@ public class SwerveModule {
   private final CANSparkMax driveMotor;
   private final WPI_TalonSRX steerMotor;
   private final RelativeEncoder driveEncoder;
-  //private final WPI_CANCoder steerEncoder;
 
   private NetworkTableEntry driveEncoderUI;
   private NetworkTableEntry steerEncoderUI;
