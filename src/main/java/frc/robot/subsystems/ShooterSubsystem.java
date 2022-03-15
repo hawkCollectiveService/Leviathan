@@ -42,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     // If the A button is pressed, the shoot Low process will begin.
-    if (assistantController.getAButtonPressed()) {
+    if (assistantController.getXButtonPressed()) {
       shootLow();
     }
 
@@ -52,7 +52,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     // Temporary stop for the shooter
-    if (assistantController.getAButtonReleased()
+    if (assistantController.getXButtonReleased()
         || assistantController.getYButtonReleased()) {
       shootStop();
     }

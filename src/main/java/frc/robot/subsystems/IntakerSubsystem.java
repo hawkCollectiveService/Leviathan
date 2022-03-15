@@ -31,11 +31,11 @@ public class IntakerSubsystem extends SubsystemBase {
 
   public void intake() {
 
-    if (assistantDriver.getXButtonPressed()) {
+    if (assistantDriver.getAButtonPressed()) {
 
       counterClockSpin();
 
-    } else if (assistantDriver.getXButtonReleased()) {
+    } else if (assistantDriver.getAButtonReleased()) {
       
       stop();
     

@@ -28,7 +28,7 @@ public final class Constants {
     /**
      * Debug variable used to control logging output to the console.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // Zero 
     public static final double NO_SPEED = 0.0;
@@ -52,8 +52,11 @@ public final class Constants {
         public static final double CLIMBER_ENCODER_MIN_VAL = 0.0;
         public static final double CLIMBER_ENCODER_STEP = 3506;
 
-        public static final double LATCH_LOCKED_POS = 0.0;
-        public static final double LATCH_UNLOCKED_POS = 0.66;  
+        public static final int CLIMBER_LEFT_LATCH_PWM_PORT = 0;    // Servo
+        public static final int CLIMBER_RIGHT_LATCH_PWM_PORT = 1;   // Servo
+
+        public static final double LATCH_LOCKED_POS = 0.0;      // 0 degrees
+        public static final double LATCH_UNLOCKED_POS = 0.66;  // 180 degrees
 
     }
 
@@ -134,10 +137,10 @@ public final class Constants {
         /**
          * Polarity modifier variables for the drive motors
          */
-        public static final int LEFT_FRONT_DRIVE_POLARITY_MOD = 1;
-        public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = -1;
-        public static final int LEFT_BACK_DRIVE_POLARITY_MOD = -1;
-        public static final int RIGHT_BACK_DRIVE_POLARITY_MOD = 1;
+        public static final int LEFT_FRONT_DRIVE_POLARITY_MOD = -1;
+        public static final int RIGHT_FRONT_DRIVE_POLARITY_MOD = 1;
+        public static final int LEFT_BACK_DRIVE_POLARITY_MOD = 1;
+        public static final int RIGHT_BACK_DRIVE_POLARITY_MOD = -1;
 
         /**
          * Speed modifier variables for the steer motors

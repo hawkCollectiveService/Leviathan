@@ -25,8 +25,8 @@ public class ClimberSubsystem extends SubsystemBase {
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
 
-  // private Servo leftLatch = new Servo(0); // PWM Port number
-  // private Servo rightLatch = new Servo(1); // PWM Port number
+  private Servo leftLatch = new Servo(Constants.Climber.CLIMBER_LEFT_LATCH_PWM_PORT);   // PWM Port number 0=leftServo
+  private Servo rightLatch = new Servo(Constants.Climber.CLIMBER_RIGHT_LATCH_PWM_PORT); // PWM Port number 1=rightServo
 
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
@@ -116,13 +116,13 @@ public class ClimberSubsystem extends SubsystemBase {
 
     } else if (assistantDriverController.getRightStickButtonPressed()){
       
-      //leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
-      //rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      // leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));  // TODO. Test this.
+      // rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
 
     } else if (assistantDriverController.getLeftStickButtonPressed()){
 
-      //leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
-      //rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      // leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));f // TODO. Test this.
+      // rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
 
     }
   }
