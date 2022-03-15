@@ -63,8 +63,10 @@ public class ClimberSubsystem extends SubsystemBase {
     */
 
     leftEncoderPosition = tab.add("Left Arm Encoder", 0).getEntry();
-
+    rightEncoderPosition = tab.add("Right Arm Encoder", 0).getEntry();  // 2022-03-15
+  
     this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
+    this.rightWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);  // 2022-03-15
 
     stopClimber();
   }
