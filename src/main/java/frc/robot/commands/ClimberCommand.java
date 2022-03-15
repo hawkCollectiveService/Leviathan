@@ -31,7 +31,7 @@ public class ClimberCommand extends CommandBase {
   // Calls which drive mode we're going to use during competitions
   @Override
   public void execute() {
-    // climberSubsystem.climb();      // 2022-03-15 c'd out temporarily. TODO test it.
+    climberSubsystem.climb();
     climberSubsystem.readEncoder();
   }
 

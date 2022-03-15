@@ -35,6 +35,7 @@ public class ClimberSubsystem extends SubsystemBase {
   private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
 
   private NetworkTableEntry leftEncoderPosition;
+  private NetworkTableEntry rightEncoderPosition;
 
   public NetworkTableEntry latchLockPosition = tab.add("Latch Lock Position", Constants.Climber.LATCH_LOCKED_POS)
       .withWidget(BuiltInWidgets.kNumberSlider)
@@ -134,7 +135,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private void contract() {
     leftWinchTalonFX.set((-1) * Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set((-1) * Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD);
+    rightWinchTalonFX.set((-1) * Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void stopClimber() {
@@ -144,9 +145,11 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public double readEncoder() {
     this.leftEncoderPosition.setDouble(Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+    this.rightEncoderPosition.setDouble(Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())); // 2022-03-15.
 
     if (Constants.DEBUG){
-      System.out.println("Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+      System.out.println("LEFT  Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+      System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
     return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());

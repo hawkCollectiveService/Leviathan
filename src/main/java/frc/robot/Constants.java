@@ -28,7 +28,7 @@ public final class Constants {
     /**
      * Debug variable used to control logging output to the console.
      */
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     // Zero 
     public static final double NO_SPEED = 0.0;
