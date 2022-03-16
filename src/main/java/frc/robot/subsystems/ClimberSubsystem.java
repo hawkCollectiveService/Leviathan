@@ -77,9 +77,11 @@ public class ClimberSubsystem extends SubsystemBase {
    * process will start.
    */
   public void climb() {
-    exceedsLimits();
+    // readEncoder()
+    exceedsLimits();  // 2022-03-16
 
-    if (exceedsLimits()  && enableCorrection && !needsCorrection) {
+    // if (readEncoder() >= (Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP)  && enableCorrection && !needsCorrection) {
+    if (exceedsLimits()  && enableCorrection && !needsCorrection) { // 2022-03-16
 
       needsCorrection = true;
 
@@ -180,6 +182,10 @@ public class ClimberSubsystem extends SubsystemBase {
     return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());  
   }
 
+  /**
+   * Reads Climber Left and Right encoder values to determine if 
+   * @return
+   */
   public boolean exceedsLimits() {
     this.leftEncoderPosition.setDouble(Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     this.rightEncoderPosition.setDouble(Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())); // 2022-03-15.

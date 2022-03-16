@@ -8,7 +8,7 @@ import frc.robot.subsystems.IntakerSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An Intaker command that uses an Intaker subsystem. */
-@SuppressWarnings("unused")
+// @SuppressWarnings("unused")
 public class IntakerCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakerSubsystem intakerSubsystem;
