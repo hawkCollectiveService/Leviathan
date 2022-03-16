@@ -42,15 +42,24 @@ public final class Constants {
         // Speed modifier variables
         public static final double LEFT_CLIMB_SPEED = 0.4;
         public static final double RIGHT_CLIMB_SPEED = 0.4;
+        public static final double LEFT_CORRECTION_SPEED = 0.125;
+        public static final double RIGHT_CORRECTION_SPEED = 0.125;
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
         public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
 
-        public static final double CLIMBER_ENCODER_MAX_VAL = 14900;
-        public static final double CLIMBER_ENCODER_MID_VAL = 7450;
-        public static final double CLIMBER_ENCODER_MIN_VAL = 0.0;
-        public static final double CLIMBER_ENCODER_STEP = 3506;
+        public static final double LEFT_CLIMBER_ENCODER_MAX_VAL = 14900;
+        public static final double LEFT_CLIMBER_ENCODER_MID_VAL = 7450;
+        public static final double LEFT_CLIMBER_ENCODER_MIN_VAL = 0.0;
+        public static final double LEFT_CLIMBER_ENCODER_STEP = 3506;
+        public static final double LEFT_CLIMBER_ENCODER_UPPER_LIMIT = 20000.0;//NEEDS TO BE DETERMINED
+
+        public static final double RIGHT_CLIMBER_ENCODER_MAX_VAL = 14900;//NEEDS TO BE DETERMINED
+        public static final double RIGHT_CLIMBER_ENCODER_MID_VAL = 7450;//NEEDS TO BE DETERMINED
+        public static final double RIGHT_CLIMBER_ENCODER_MIN_VAL = 0.0;
+        public static final double RIGHT_CLIMBER_ENCODER_STEP = 3506;//NEEDS TO BE DETERMINED
+        public static final double RIGHT_CLIMBER_ENCODER_UPPER_LIMIT = 20000.0;//NEEDS TO BE DETERMINED
 
         public static final int CLIMBER_LEFT_LATCH_PWM_PORT = 0;    // Servo
         public static final int CLIMBER_RIGHT_LATCH_PWM_PORT = 1;   // Servo

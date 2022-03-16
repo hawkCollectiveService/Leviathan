@@ -77,9 +77,9 @@ public class ClimberSubsystem extends SubsystemBase {
    * process will start.
    */
   public void climb() {
-    readEncoder();
+    exceedsLimits();
 
-    if (readEncoder() >= (Constants.Climber.CLIMBER_ENCODER_MAX_VAL - Constants.Climber.CLIMBER_ENCODER_STEP) && enableCorrection && !needsCorrection) {
+    if (exceedsLimits()  && enableCorrection && !needsCorrection) {
 
       needsCorrection = true;
 
@@ -87,7 +87,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
       contract();
 
-      if (readEncoder() <= (Constants.Climber.CLIMBER_ENCODER_MAX_VAL - (Constants.Climber.CLIMBER_ENCODER_STEP * 2))){
+      if (exceedsLimits()){
         needsCorrection = false;
         stopClimber();
       }
@@ -130,14 +130,36 @@ public class ClimberSubsystem extends SubsystemBase {
     }
   }
 
+  /**
+   * Returns speed for Climber motor based on needsCorrection.
+   * If needsCorrection then return slower speed
+   * Else return Climb speed to lift the robot.
+   */
+  private double getLeftSpeed() {
+    return (needsCorrection) 
+      ? Constants.Climber.LEFT_CORRECTION_SPEED 
+      : Constants.Climber.LEFT_CLIMB_SPEED;
+  }
+
+ /**
+   * Returns speed for Climber motor based on needsCorrection.
+   * If needsCorrection then return slower speed
+   * Else return Climb speed to lift the robot.
+   */
+  private double getRightSpeed() {
+    return (needsCorrection) 
+      ? Constants.Climber.RIGHT_CORRECTION_SPEED
+      : Constants.Climber.RIGHT_CLIMB_SPEED;
+  }
+
   private void extend() {
-    leftWinchTalonFX.set(Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set(Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
+    leftWinchTalonFX.set(getLeftSpeed() * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set(getRightSpeed() * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void contract() {
-    leftWinchTalonFX.set((-1) * Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set((-1) * Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
+    leftWinchTalonFX.set((-1) * getLeftSpeed() * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set((-1) * getRightSpeed() * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void stopClimber() {
@@ -157,6 +179,19 @@ public class ClimberSubsystem extends SubsystemBase {
     return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
   }
 
+  public boolean exceedsLimits() {
+    this.leftEncoderPosition.setDouble(Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+    this.rightEncoderPosition.setDouble(Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())); // 2022-03-15.
+
+    if (Constants.DEBUG){
+      System.out.println("LEFT  Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+      System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
+    }
+
+    return (Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP) >= Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())
+            || (Constants.Climber.RIGHT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.RIGHT_CLIMBER_ENCODER_STEP) >= Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+  }
+  
   private void disableCorrections() {
     enableCorrection = false;
     needsCorrection = false;
