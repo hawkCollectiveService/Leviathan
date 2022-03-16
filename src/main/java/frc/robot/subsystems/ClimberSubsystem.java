@@ -130,14 +130,36 @@ public class ClimberSubsystem extends SubsystemBase {
     }
   }
 
-  private void extend() {
-    leftWinchTalonFX.set(Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set(Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
+  /**
+   * Returns speed for Climber motor based on needsCorrection.
+   * If needsCorrection then return slower speed
+   * Else return Climb speed to lift the robot.
+   */
+  private double getLeftSpeed() {
+    return (needsCorrection) 
+      ? Constants.Climber.LEFT_CORRECTION_SPEED 
+      : Constants.Climber.LEFT_CLIMB_SPEED;
+  }
+
+ /**
+   * Returns speed for Climber motor based on needsCorrection.
+   * If needsCorrection then return slower speed
+   * Else return Climb speed to lift the robot.
+   */
+  private double getRightSpeed() {
+    return (needsCorrection) 
+      ? Constants.Climber.RIGHT_CORRECTION_SPEED
+      : Constants.Climber.RIGHT_CLIMB_SPEED;
+  }
+
+  private void extend() {    
+    leftWinchTalonFX.set(getLeftSpeed() * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set(getRightSpeed() * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void contract() {
-    leftWinchTalonFX.set((-1) * Constants.Climber.LEFT_CLIMB_SPEED * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
-    rightWinchTalonFX.set((-1) * Constants.Climber.RIGHT_CLIMB_SPEED * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
+    leftWinchTalonFX.set((-1) * getLeftSpeed() * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
+    rightWinchTalonFX.set((-1) * getRightSpeed() * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
 
   private void stopClimber() {
@@ -154,7 +176,8 @@ public class ClimberSubsystem extends SubsystemBase {
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+    // TODO Fix encoder value calculation based on left and right encoders.
+    return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());  
   }
 
   private void disableCorrections() {
