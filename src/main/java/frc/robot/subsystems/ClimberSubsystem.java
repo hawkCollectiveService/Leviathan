@@ -119,13 +119,13 @@ public class ClimberSubsystem extends SubsystemBase {
 
     } else if (assistantDriverController.getRightStickButtonPressed()){
       
-      // leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));  // TODO. Test this.
-      // rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
 
     } else if (assistantDriverController.getLeftStickButtonPressed()){
 
-      // leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));f // TODO. Test this.
-      // rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
 
     }
   }

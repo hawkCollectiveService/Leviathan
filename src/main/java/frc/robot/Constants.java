@@ -28,7 +28,7 @@ public final class Constants {
     /**
      * Debug variable used to control logging output to the console.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // Zero 
     public static final double NO_SPEED = 0.0;
@@ -40,8 +40,8 @@ public final class Constants {
         public static final int RIGHT_WINCH_TALON_FX_ID = 15;
 
         // Speed modifier variables
-        public static final double LEFT_CLIMB_SPEED = 0.125;
-        public static final double RIGHT_CLIMB_SPEED = 0.125;
+        public static final double LEFT_CLIMB_SPEED = 0.4;
+        public static final double RIGHT_CLIMB_SPEED = 0.4;
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
