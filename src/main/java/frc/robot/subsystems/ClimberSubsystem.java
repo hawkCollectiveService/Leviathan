@@ -152,7 +152,7 @@ public class ClimberSubsystem extends SubsystemBase {
       : Constants.Climber.RIGHT_CLIMB_SPEED;
   }
 
-  private void extend() {
+  private void extend() {    
     leftWinchTalonFX.set(getLeftSpeed() * Constants.Climber.LEFT_CLIMBER_POLARITY_MOD); 
     rightWinchTalonFX.set(getRightSpeed() * Constants.Climber.RIGHT_CLIMBER_POLARITY_MOD);
   }
@@ -176,7 +176,8 @@ public class ClimberSubsystem extends SubsystemBase {
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+    // TODO Fix encoder value calculation based on left and right encoders.
+    return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());  
   }
 
   public boolean exceedsLimits() {
