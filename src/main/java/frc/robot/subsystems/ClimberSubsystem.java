@@ -97,41 +97,40 @@ public class ClimberSubsystem extends SubsystemBase {
         stopClimber();
       }
 
-    } else if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed()){
-      
+    }
+    
+    if (assistantDriverController.getLeftBumperPressed() && !assistantDriverController.getRightBumperPressed()){  
       extend();
       hasLifted = true;
-
-    } else if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed() && hasLifted){
-
+    }
+    
+    if (assistantDriverController.getRightBumperPressed() && !assistantDriverController.getLeftBumperPressed() && hasLifted){
       contract();
-
-    } else if (assistantDriverController.getLeftBumperReleased()){
-
+    }
+    
+    if (assistantDriverController.getLeftBumperReleased()){
       stopClimber();
-
-    } else if (assistantDriverController.getRightBumperReleased()){
-
+    }
+    
+    if (assistantDriverController.getRightBumperReleased()){
       stopClimber();
-
-    } else if (assistantDriverController.getStartButtonPressed()){
-
+    }
+    
+    if (assistantDriverController.getStartButtonPressed()){
+      System.out.println("Start CLIMBING");
       disableCorrections();
-
-    } else if (assistantDriverController.getBackButtonPressed()){
-
+    }
+    
+    if (assistantDriverController.getBackButtonPressed()){
+      System.out.println("Stop CLIMBING (BackButton pressed)");
       enableCorrections();
-
-    } else if (assistantDriverController.getRightStickButtonPressed()){
+    }
+    
+    if (assistantDriverController.getRightStickButtonPressed() ){
       centerTalonSRX.set(Constants.Climber.CENTER_LATCH_SPEED * Constants.Climber.CENTER_POLARITY_MOD);
-      // leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
-      // rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
-
-    } else if (assistantDriverController.getLeftStickButtonPressed()){
-
-      // leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
-      // rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
-
+    }
+    if (assistantDriverController.getRightStickButtonReleased()) {
+      centerTalonSRX.set(Constants.NO_SPEED);
     }
   }
 
@@ -187,7 +186,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   /**
-   * Reads Climber Left and Right encoder values to determine if 
+   * Reads Climber Left and Right encoder values to determine if exceeded Max height.
    * @return
    */
   public boolean exceedsLimits() {

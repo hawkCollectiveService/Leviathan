@@ -30,7 +30,7 @@ public class IntakerSubsystem extends SubsystemBase {
   }
 
   public void intake() {
-    counterClockSpin(); // 2022-03-17. Initially spins.  A-Button acts as a brake.
+    // A-Button acts as a brake.
     if (assistantDriver.getAButtonPressed()) {
       stop();
    } else if (assistantDriver.getAButtonReleased()) {
