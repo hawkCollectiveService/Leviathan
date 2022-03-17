@@ -170,6 +170,7 @@ public class ClimberSubsystem extends SubsystemBase {
   private void stopClimber() {
     leftWinchTalonFX.set(Constants.NO_SPEED);
     rightWinchTalonFX.set(Constants.NO_SPEED);
+    centerTalonSRX.set(Constants.NO_SPEED);  // 2022-03-17
   }
 
   public double readEncoder() {
@@ -181,7 +182,7 @@ public class ClimberSubsystem extends SubsystemBase {
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    // TODO Fix encoder value calculation based on left and right encoders.
+    // DevNote: Fix encoder value calculation based on left and right encoders.  See exceedsLimits() method.
     return Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());  
   }
 

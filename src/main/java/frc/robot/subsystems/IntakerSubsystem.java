@@ -30,15 +30,11 @@ public class IntakerSubsystem extends SubsystemBase {
   }
 
   public void intake() {
-
+    counterClockSpin(); // 2022-03-17. Initially spins.  A-Button acts as a brake.
     if (assistantDriver.getAButtonPressed()) {
-
-      counterClockSpin();
-
-    } else if (assistantDriver.getAButtonReleased()) {
-      
       stop();
-    
+   } else if (assistantDriver.getAButtonReleased()) {
+     counterClockSpin();
     }
   }
 
