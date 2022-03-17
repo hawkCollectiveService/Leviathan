@@ -26,8 +26,8 @@ public class ClimberSubsystem extends SubsystemBase {
   private WPI_TalonFX rightWinchTalonFX = new WPI_TalonFX(Constants.Climber.RIGHT_WINCH_TALON_FX_ID);
   // private WPI_CANCoder leftTalonFXEncoder = new WPI_CANCoder(Constants.Climber.LEFT_WINCH_TALON_FX_ID);
 
-  private Servo leftLatch = new Servo(Constants.Climber.CLIMBER_LEFT_LATCH_PWM_PORT);   // PWM Port number 0=leftServo
-  private Servo rightLatch = new Servo(Constants.Climber.CLIMBER_RIGHT_LATCH_PWM_PORT); // PWM Port number 1=rightServo
+  // private Servo leftLatch = new Servo(Constants.Climber.CLIMBER_LEFT_LATCH_PWM_PORT);   // PWM Port number 0=leftServo
+  // private Servo rightLatch = new Servo(Constants.Climber.CLIMBER_RIGHT_LATCH_PWM_PORT); // PWM Port number 1=rightServo
 
   private WPI_TalonSRX centerTalonSRX = new WPI_TalonSRX( Constants.Climber.CENTER_LATCH_ID );
 
