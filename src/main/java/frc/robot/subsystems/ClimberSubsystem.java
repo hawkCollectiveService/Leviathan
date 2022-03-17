@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import java.util.Map;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -27,6 +28,8 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private Servo leftLatch = new Servo(Constants.Climber.CLIMBER_LEFT_LATCH_PWM_PORT);   // PWM Port number 0=leftServo
   private Servo rightLatch = new Servo(Constants.Climber.CLIMBER_RIGHT_LATCH_PWM_PORT); // PWM Port number 1=rightServo
+
+  private WPI_TalonSRX centerTalonSRX = new WPI_TalonSRX( Constants.Climber.CENTER_LATCH_ID );
 
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
@@ -120,14 +123,14 @@ public class ClimberSubsystem extends SubsystemBase {
       enableCorrections();
 
     } else if (assistantDriverController.getRightStickButtonPressed()){
-      
-      leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
-      rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      centerTalonSRX.set(Constants.Climber.CENTER_LATCH_SPEED * Constants.Climber.CENTER_POLARITY_MOD);
+      // leftLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      // rightLatch.set(latchUnlockedPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
 
     } else if (assistantDriverController.getLeftStickButtonPressed()){
 
-      leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
-      rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
+      // leftLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_UNLOCKED_POS));
+      // rightLatch.set(latchLockPosition.getDouble(Constants.Climber.LATCH_LOCKED_POS));
 
     }
   }

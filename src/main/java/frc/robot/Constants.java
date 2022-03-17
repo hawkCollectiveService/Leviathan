@@ -38,16 +38,19 @@ public final class Constants {
         // Falcon Motor CAN IDs
         public static final int LEFT_WINCH_TALON_FX_ID = 13;
         public static final int RIGHT_WINCH_TALON_FX_ID = 15;
-
+        public static final int CENTER_LATCH_ID = 30;
+        
         // Speed modifier variables
         public static final double LEFT_CLIMB_SPEED = 0.4;
         public static final double RIGHT_CLIMB_SPEED = 0.4;
         public static final double LEFT_CORRECTION_SPEED = 0.125;
         public static final double RIGHT_CORRECTION_SPEED = 0.125;
+        public static final double CENTER_LATCH_SPEED = 0.1;
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
         public static final int LEFT_CLIMBER_POLARITY_MOD = -1;
+        public static final int CENTER_POLARITY_MOD = 1;
 
         public static final double LEFT_CLIMBER_ENCODER_MAX_VAL = 14900;
         public static final double LEFT_CLIMBER_ENCODER_MID_VAL = 7450;
@@ -60,7 +63,7 @@ public final class Constants {
         public static final double RIGHT_CLIMBER_ENCODER_MIN_VAL = 0.0;
         public static final double RIGHT_CLIMBER_ENCODER_STEP = 3506;//NEEDS TO BE DETERMINED
         public static final double RIGHT_CLIMBER_ENCODER_UPPER_LIMIT = 20000.0;//NEEDS TO BE DETERMINED
-
+        
         public static final int CLIMBER_LEFT_LATCH_PWM_PORT = 0;    // Servo
         public static final int CLIMBER_RIGHT_LATCH_PWM_PORT = 1;   // Servo
 
