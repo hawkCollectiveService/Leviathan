@@ -196,6 +196,7 @@ public class ClimberSubsystem extends SubsystemBase {
     if (Constants.DEBUG){
       // DevTest. 2022-10-26.  Set to zero before logging.. values in log still non-zero for some reason.
       // We are observing encoder value drifting.
+      // TODO: Try getAbsolute() encoder values.
       //this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
       //this.rightWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
     
