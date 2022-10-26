@@ -194,6 +194,11 @@ public class ClimberSubsystem extends SubsystemBase {
     this.rightEncoderPosition.setDouble(Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())); // 2022-03-15.
 
     if (Constants.DEBUG){
+      // DevTest. 2022-10-26.  Set to zero before logging.. values in log still non-zero for some reason.
+      // We are observing encoder value drifting.
+      //this.leftWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
+      //this.rightWinchTalonFX.getSensorCollection().setIntegratedSensorPosition(0, 1000);
+    
       System.out.println("LEFT  Encoder Position: " + Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }

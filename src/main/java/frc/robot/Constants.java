@@ -45,7 +45,7 @@ public final class Constants {
         public static final double RIGHT_CLIMB_SPEED = 0.4;
         public static final double LEFT_CORRECTION_SPEED = 0.125;
         public static final double RIGHT_CORRECTION_SPEED = 0.125;
-        public static final double CENTER_LATCH_SPEED = 0.5;
+        public static final double CENTER_LATCH_SPEED = 0.75; // 2022-10-19 better value after testing.
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;

@@ -32,9 +32,10 @@ public class IntakerSubsystem extends SubsystemBase {
   public void intake() {
     // A-Button acts as a brake.
     if (assistantDriver.getAButtonPressed()) {
-      stop();
+      clockSpin();
+      //stop();
    } else if (assistantDriver.getAButtonReleased()) {
-     counterClockSpin();
+     stop();
     }
   }
 
