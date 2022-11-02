@@ -55,13 +55,13 @@ public final class Constants {
         public static final double LEFT_CLIMBER_ENCODER_MAX_VAL = 14900;
         public static final double LEFT_CLIMBER_ENCODER_MID_VAL = 7450;
         public static final double LEFT_CLIMBER_ENCODER_MIN_VAL = 0.0;
-        public static final double LEFT_CLIMBER_ENCODER_STEP = 3506;
+        public static final double LEFT_CLIMBER_ENCODER_STEP = 3506; // TODO. 2022-11-02. Should this be 2048 which is one rotation??
         public static final double LEFT_CLIMBER_ENCODER_UPPER_LIMIT = 20000.0;//NEEDS TO BE DETERMINED
 
         public static final double RIGHT_CLIMBER_ENCODER_MAX_VAL = 14900;//NEEDS TO BE DETERMINED
         public static final double RIGHT_CLIMBER_ENCODER_MID_VAL = 7450;//NEEDS TO BE DETERMINED
         public static final double RIGHT_CLIMBER_ENCODER_MIN_VAL = 0.0;
-        public static final double RIGHT_CLIMBER_ENCODER_STEP = 3506;//NEEDS TO BE DETERMINED
+        public static final double RIGHT_CLIMBER_ENCODER_STEP = 3506;//TODO. 2022-11-02. Should this be 2048 which is one rotation??
         public static final double RIGHT_CLIMBER_ENCODER_UPPER_LIMIT = 20000.0;//NEEDS TO BE DETERMINED
         
         public static final int CLIMBER_LEFT_LATCH_PWM_PORT = 0;    // Servo

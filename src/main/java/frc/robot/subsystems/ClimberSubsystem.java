@@ -204,8 +204,10 @@ public class ClimberSubsystem extends SubsystemBase {
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    return (Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP) >= Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())
-            || (Constants.Climber.RIGHT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.RIGHT_CLIMBER_ENCODER_STEP) >= Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+    return (Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP) 
+      >= Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())
+      || (Constants.Climber.RIGHT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.RIGHT_CLIMBER_ENCODER_STEP) 
+      >= Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
   }
   
   private void disableCorrections() {

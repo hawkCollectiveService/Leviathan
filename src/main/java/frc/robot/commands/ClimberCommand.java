@@ -32,7 +32,7 @@ public class ClimberCommand extends CommandBase {
   @Override
   public void execute() {
     climberSubsystem.climb();
-    climberSubsystem.exceedsLimits();
+    climberSubsystem.exceedsLimits(); // 2022-11-02. Is this line needed??  Should be removed and tested.
   }
 
   // Called once the command ends or is interrupted.
