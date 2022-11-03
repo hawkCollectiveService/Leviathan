@@ -33,7 +33,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
-  private boolean enableCorrection = false;  // 2022-11-03. Set to false initially.
+  private boolean enableCorrection = false;  // 2022-11-03. Set to false initially. Verified. CRITICAL.
 
   private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
 
