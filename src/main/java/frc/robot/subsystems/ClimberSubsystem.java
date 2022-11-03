@@ -33,7 +33,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private boolean hasLifted = false;
   private boolean needsCorrection = false;
-  private boolean enableCorrection = true;
+  private boolean enableCorrection = false;  // 2022-11-03. Set to false initially.
 
   private ShuffleboardTab tab = Shuffleboard.getTab("Subsystem");
 
@@ -204,17 +204,26 @@ public class ClimberSubsystem extends SubsystemBase {
       System.out.println("RIGHT Encoder Position: " + Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()));
     }
 
-    return (Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP) 
+    return (
+      Constants.Climber.LEFT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.LEFT_CLIMBER_ENCODER_STEP) 
       >= Math.abs(this.leftWinchTalonFX.getSensorCollection().getIntegratedSensorPosition())
-      || (Constants.Climber.RIGHT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.RIGHT_CLIMBER_ENCODER_STEP) 
-      >= Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition());
+      || 
+      (Constants.Climber.RIGHT_CLIMBER_ENCODER_MAX_VAL - Constants.Climber.RIGHT_CLIMBER_ENCODER_STEP) 
+      >= Math.abs(this.rightWinchTalonFX.getSensorCollection().getIntegratedSensorPosition()
+      );
   }
   
+  /*
+  Called by StartButton pressed on XboxController.
+  */
   private void disableCorrections() {
     enableCorrection = false;
     needsCorrection = false;
   }
 
+  /*
+  Called by BackButton pressed on XboxController.
+  */
   private void enableCorrections() {
     enableCorrection = true;
   }
