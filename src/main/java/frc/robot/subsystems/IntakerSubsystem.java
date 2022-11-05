@@ -22,38 +22,79 @@ public class IntakerSubsystem extends SubsystemBase {
       .withWidget(BuiltInWidgets.kNumberSlider)
       .withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
-  private WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_ID);
+    public NetworkTableEntry intakeFlipSpeed = tab.add("Intake Flip Speed", Constants.Intake.INTAKE_SPEED)
+      .withWidget(BuiltInWidgets.kNumberSlider)
+      .withProperties(Map.of("min", 0, "max", 1)).getEntry();
+
+  private WPI_TalonSRX intakeSpinnerTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_SPINNER_ID);
+  private WPI_TalonSRX intakeFlipTalon = new WPI_TalonSRX(Constants.Intake.INTAKE_FLIP_ID);
+
   private XboxController assistantDriver = new XboxController(Constants.Xbox.XBOX_ASSISTANT_CONTROLLER_ID);
+  private XboxController driver = new XboxController(Constants.Xbox.XBOX_DRIVER_CONTROLLER_ID);
 
   /** Creates a new IntakerSubsystem. */
   public IntakerSubsystem() {
   }
 
   public void intake() {
+    if (driver.getRightBumperPressed())
+    {
+      lower();
+    }
+    else if(driver.getRightBumperReleased())
+    {
+      stopFlip();
+    }
+
+    if (driver.getLeftBumperPressed())
+    {
+      raise();
+    }
+    else if (driver.getLeftBumperReleased())
+    {
+      stopFlip();
+    }
     // A-Button acts as a brake.
-    if (assistantDriver.getAButtonPressed()) {
-      clockSpin();
+    if (driver.getAButtonPressed()) {
+      //clockSpin();
+      counterClockSpin();  // 2022-11-05.
       //stop();
-   } else if (assistantDriver.getAButtonReleased()) {
+   } else if (driver.getAButtonReleased()) {
      stop();
     }
   }
 
   public void counterClockSpin() {
 
-    intakeTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD);
+    intakeSpinnerTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD);
 
   }
 
   public void clockSpin() {
 
-    intakeTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD * -1);
+    intakeSpinnerTalon.set(intakeSpeed.getDouble(Constants.Intake.INTAKE_SPEED) * Constants.Intake.INTAKE_POLARITY_MOD * -1);
 
   }
 
   public void stop() {
 
-    intakeTalon.set(Constants.NO_SPEED);
+    intakeSpinnerTalon.set(Constants.NO_SPEED);
+
+  }
+
+  public void lower()
+  {
+    intakeFlipTalon.set(intakeFlipSpeed.getDouble(Constants.Intake.INTAKE_FLIP_SPEED)*Constants.Intake.INTAKE_FLIP_POLARITY_MOD);
+  }
+
+  public void raise()
+  {
+    intakeFlipTalon.set(intakeFlipSpeed.getDouble(Constants.Intake.INTAKE_FLIP_SPEED)*Constants.Intake.INTAKE_FLIP_POLARITY_MOD *-1);
+  }
+
+  public void stopFlip() {
+
+    intakeFlipTalon.set(Constants.NO_SPEED);
 
   }
 }

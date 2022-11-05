@@ -45,7 +45,7 @@ public final class Constants {
         public static final double RIGHT_CLIMB_SPEED = 0.4;
         public static final double LEFT_CORRECTION_SPEED = 0.125;
         public static final double RIGHT_CORRECTION_SPEED = 0.125;
-        public static final double CENTER_LATCH_SPEED = 0.5; // 2022-11-03 better value for new latch design.
+        public static final double CENTER_LATCH_SPEED = 0.4; // 2022-11-03 better value for new latch design.
 
         // Polarity modifier variables
         public static final int RIGHT_CLIMBER_POLARITY_MOD = 1;
@@ -104,13 +104,16 @@ public final class Constants {
     public static class Intake {
 
         // CAN IDs for Intake
-        public static final int INTAKE_ID = 9;
+        public static final int INTAKE_SPINNER_ID = 9;
+        public static final int INTAKE_FLIP_ID = 1;
 
         // Speed modifier variables
-        public static final double INTAKE_SPEED = 0.25;
+        public static final double INTAKE_SPEED = 0.5;  // 2022-11-05. Increase to 0.5
+        public static final double INTAKE_FLIP_SPEED = 0.95;  // 2022-11-05. /22-11-05 after comp value before changes was .65
 
         // Polarity modifier variables
         public static final int INTAKE_POLARITY_MOD = -1;
+        public static final int INTAKE_FLIP_POLARITY_MOD = -1;
 
     }
 
@@ -124,7 +127,7 @@ public final class Constants {
          */
         public static final int LEFT_FRONT_TALON_SRX_ID = 3;
         public static final int LEFT_BACK_TALON_SRX_ID = 2;
-        public static final int RIGHT_FRONT_TALON_SRX_ID = 1;
+        public static final int RIGHT_FRONT_TALON_SRX_ID = 100; // Controller is not used.
         public static final int RIGHT_BACK_TALON_SRX_ID = 4;
 
         /**
@@ -141,10 +144,10 @@ public final class Constants {
         /**
          * Speed modifier variables for the drive motors
          */
-        public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 6;
-        public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 6;
-        public static final double LEFT_BACK_DRIVE_SPEED_MOD = 6;
-        public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 6;
+        public static final double LEFT_FRONT_DRIVE_SPEED_MOD = 20; //  11/5/2022 original value was 6
+        public static final double RIGHT_FRONT_DRIVE_SPEED_MOD = 20;
+        public static final double LEFT_BACK_DRIVE_SPEED_MOD = 20;
+        public static final double RIGHT_BACK_DRIVE_SPEED_MOD = 20;
 
         /**
          * Polarity modifier variables for the drive motors
@@ -212,7 +215,7 @@ public final class Constants {
 
     public static class Autonomous {
 
-        public static double AUTO_DRIVE_SPEED = -0.5;
+        public static double AUTO_DRIVE_SPEED = -0.4;
         public static double AUTO_DRIVE_TIME_DELAY = 1.5;
         public static double AUTO_SHOOT_TIME_DELAY = 2.0;
 

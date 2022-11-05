@@ -3,6 +3,9 @@
 ## Driver XBoxController
 - **LeftStick** = Left Tank Drive
 - **RightStick** = Right Tank Drive
+- **AButton** = Spin intake
+- **BButton** = Lower intake
+- **XButton** =  Raise intake
 
 ## Assistant XBoxController
 - **AButton** = Intaker  (when pressed start, when button released stop)
